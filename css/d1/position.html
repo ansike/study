@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>三栏布局</title>
+    <title>三栏布局(position)</title>
     <style>
         html,body{
             width: 100%;
@@ -17,19 +17,22 @@
             margin: 20px;
             background: white;
             overflow: hidden;
+            position: relative;
         }
         .left{
             width: 300px;
-            float: left;
             background: red;
             min-height:100px;
+            position: absolute;
+            left: 0;
         }
         .right{
-            float: right;
             width: 400px;
             background: green;
             min-height:100px;
             height:300px;
+            position: absolute;
+            right: 0;
         }
         .center{
             background: blue;
