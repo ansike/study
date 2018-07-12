@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三栏布局(margin负值)</title>
+    <style>
+        html,body{
+            width: 100%;
+            height:100%;
+            margin:0;
+            padding:0;
+            background: gray;
+        }
+        body{
+        }
+        .content{
+            margin: 20px;
+            background: white;
+            /*overflow: hidden;*/
+            float: left;
+        }
+        .left{
+            width: 300px;
+            background: red;
+            min-height:100px;
+            position: absolute;
+            left: 0;
+        }
+        .right{
+            width: 400px;
+            background: green;
+            min-height:100px;
+            height:300px;
+            position: absolute;
+            right: 0;
+        }
+        .center{
+            background: blue;
+            margin: 0 450px 0 350px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="left"></div>
+        <div class="right">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="center">
+            HTML DOM overflow 属性
+            overflow 属性规定如何处理如何处理不符合元素框的内容。 语法: Object.style.overflow=visible|hidden|scroll|auto 可能的值 值描述 visible 内容不会被修剪,会呈现...
+            www.w3school.com.cn/js...  - 百度快照
+            CSS overflow 属性 | 菜鸟教程
+            CSS overflow 属性 实例 设置overflow属性进行滚动: div { width:150px; height:150px; overflow:scroll; } 尝试一下 » 属性定义及使用说明 overflow属性指定...
+            www.runoob.com/cssref/...  - 百度快照
+            CSS3 overflow-x 属性
+        </div>
+        
+    </div>
+</body>
+</html>

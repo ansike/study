@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+function Animal(name, voice) {
+    this.name = name;
+    this.voice = voice;
+
+    //实例方法
+    this.sleep = function () {
+        console.log(this.name + "正在睡觉");
+    }
+}
+
+
+//原型方法
+Animal.prototype.sendVoice = function () {
+    console.log(this.name + '的voice是' + this.voice);
+}
+
+// //constructor
+// var a = new Animal('aaa');
+// console.log(a.constructor === Animal);//true
+// console.log(a.constructor.prototype.constructor === Animal);//true
+// console.log(Animal.prototype.constructor === Animal);//true
+// console.log(Animal.prototype.constructor.prototype.constructor === Animal);//true
+
+
+// Animal.prototype = {
+//     sendVoice:function () {
+//         console.log(this.name + '的voice是' + this.voice);
+//     }
+// }
+// var a = new Animal('aaa');
+// console.log(a.constructor === Animal);//false
+// console.log(a.constructor.prototype.constructor === Animal);//false
+// console.log(Animal.prototype.constructor === Animal);//false
+// console.log(Animal.prototype.constructor.prototype.constructor === Animal);//false
+// console.log(a.constructor);//Object
+
+//原型链继承
+// function Dog(name) {
+//     this.name = name;
+//     this.voice = 'bark';
+// }
+
+// Dog.prototype = new Animal();
+// console.log(Dog)
+// let dog = new Dog('dog');
+// console.log(dog.__proto__)
+// console.log(Animal.prototype)
+// console.log(dog.sleep());
+// console.log(dog.sendVoice());
+// console.log(dog.__proto__);
+// console.log(new Animal())
+
+// //构造继承
+// function Dog(name) {
+//     Animal.apply(this,arguments);
+//     this.voice = 'bark';
+// }
+// let dog = new Dog('dog');
+// console.log(dog)
+
+//组合继承
+function Dog(name) {
+    Animal.apply(this,arguments);
+    this.voice = 'bark';
+}
+(function () {
+    //创建一个没有实例方法的类
+    var Super = function () {};
+    Super.prototype = Animal.prototype;
+
+    //将实例作为子类的原型
+    Dog.prototype = new Super();
+})()
+
+let dog = new Dog('dog');
+console.log(dog)
+</script>
+</html>
