@@ -1,0 +1,15 @@
+{  
+      "manifest_version": 2,  
+      
+      "name": "时间显示",  
+      "description": "用于查看当前时间。",  
+      "version": "1.2",
+      "icons": { "128": "icon.png" },
+      "browser_action": {  
+        "default_icon": "icon.png",  
+        "default_popup": "popup.html"  
+      },  
+      "permissions": [  
+        "tabs","http://*/*","https://*/*"
+      ]
+}  

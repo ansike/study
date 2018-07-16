@@ -1,0 +1,14 @@
+<#dataList.forEach(function (v) {#>
+    <div id="s-<#=v.eid#>" class="slide">
+        <li>
+            <a href="<#=v.href#>">
+                <img class="img" src="data:image/gif;base64,R0lGODdhAQABAPAAAP%2F%2F%2FwAAACwAAAAAAQABAEACAkQBADs%3D" 
+                data-src="<#=v.src#>">
+                </img>
+                <strong><#=v.title#></strong>
+                <span class="writer"><#=v.writer#></span>
+                <span class="good-num"><#=v.succNum#></span>
+            </a>
+        </li>
+    </div>
+<#})#>
