@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./build/webpack.base.conf.js"
+    "build": "node ./build/build.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js"
   },
   "dependencies": {},
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^9.0.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
@@ -21,9 +23,16 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
+    "ora": "^3.0.0",
+    "postcss-loader": "^2.1.6",
+    "rimraf": "^2.6.2",
     "ts-loader": "^4.4.2",
     "typescript": "^2.9.2",
     "url-loader": "^1.0.1",
-    "webpack": "^4.16.1"
+    "webpack": "^4.16.1",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.3"
   }
 }
