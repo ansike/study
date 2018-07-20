@@ -2,7 +2,7 @@
 * @Author: ansike
 * @Date:   2018-07-19 19:53:26
 * @Last Modified by:   ask
-* @Last Modified time: 2018-07-20 14:34:07
+* @Last Modified time: 2018-07-20 21:27:25
 */
 const path = require("path")
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -19,14 +19,14 @@ module.exports = {
         filename: '[name].js'
     },
     resolve:{
-        extensions:['.tsx','.ts','.js']
+        extensions:['.tsx','.ts','.js'],
     },
     module:{
         rules:[
             {
                 test: /\.tsx?$/,
-                loader: 'ts-loader'
-                //babel-loader?presets=es2015!ts-loader
+                loader: 'babel-loader?presets=es2015!ts-loader'
+                // babel-loader?presets=es2015!ts-loader
             },
             {
                 test: /\.css$/,
@@ -40,7 +40,17 @@ module.exports = {
                 test: /\.(png|jpe?g|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 query: { limit: 8000, name: 'assets/image/[name][hash:6].[ext]' }
-            }
+            },
+            // {
+            //     test: require.resolve('jquery'),
+            //     use: [{
+            //         loader: 'expose-loader',
+            //         options: 'jQuery'
+            //     },{
+            //         loader: 'expose-loader',
+            //         options: '$'
+            //     }] 
+            // }
         ]
     },
     plugins:[
@@ -48,15 +58,18 @@ module.exports = {
             filename: path.resolve(__dirname, '../dist/index.html'),
             template: 'index.html',
             inject: true,
-            // minify: {
-            //     removeComments: true,
-            //     collapseWhitespace: true,
-            //     removeAttributeQuotes: true
-            //     // more options:
-            //     // https://github.com/kangax/html-minifier#options-quick-reference
-            // },
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeAttributeQuotes: true
+                // more options:
+                // https://github.com/kangax/html-minifier#options-quick-reference
+            },
             chunksSortMode: 'dependency'
         }),
         extractCSS
-    ]
+    ],
+    externals: {
+        jquery: 'jQuery'
+    }
 }

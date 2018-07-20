@@ -2,7 +2,7 @@
 * @Author: ansike
 * @Date:   2018-07-20 11:59:47
 * @Last Modified by:   ask
-* @Last Modified time: 2018-07-20 14:12:16
+* @Last Modified time: 2018-07-20 20:12:50
 */
 process.env.NODE_ENV = 'production'
 
@@ -11,7 +11,7 @@ const rm = require('rimraf')
 const path = require("path")
 const chalk = require("chalk")
 const webpack = require('webpack')
-const webpackConfig = require('./webpack.base.conf.js')
+const webpackConfig = require('./webpack.prod.conf.js')
 
 const spinner = ora('building...')
 spinner.start()

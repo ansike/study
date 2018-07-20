@@ -1,10 +1,13 @@
+import "jquery";
+
 export default class Layout {
 
-    constructor() {
-        this.createDom();
+    constructor($root:any) {
+        this.createDom($root);
     }
 
-    public createDom(){
-        document.getElementsByTagName("body")[0].innerHTML="<div>this is ts test</div>"
+    public createDom($root:any){
+        $("#app").html("welcome to typescript");
+        // $root.innerHTML="welcome to typescript"
     }
 }
