@@ -94,6 +94,32 @@ function FirstConsole(node,arr) {
 }
 FirstConsole(node,arr);
 console.log(arr)
+//-----------------------------------------------二叉树中序遍历输出----------------------------------
+var arr = [];
+function CenterConsole(node,arr) {
+    if(node.leftChild){
+        CenterConsole(node.leftChild, arr)
+    }
+    arr.push(node.text)
+    if(node.rightChild){
+        CenterConsole(node.rightChild, arr)
+    }
+}
+CenterConsole(node,arr);
+console.log(arr)
+//-----------------------------------------------二叉树后序遍历输出----------------------------------
+var arr = [];
+function LastConsole(node,arr) {
+    if(node.leftChild){
+        LastConsole(node.leftChild, arr)
+    }
+    if(node.rightChild){
+        LastConsole(node.rightChild, arr)
+    }
+    arr.push(node.text)
+}
+LastConsole(node,arr);
+console.log(arr)
 </script>
 
 </html>
