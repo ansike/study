@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p></p>
+        <iframe src="page2.html" width='480' height='320'>
+            </iframe>
+            <button >changechildren</button>
+</body>
+<script>
+    var channel1 = new MessageChannel();
+    var channel2 = new MessageChannel();
+    var para = document.querySelector('p');
+    
+    channel1.port1.onmessage = handleMessage;
+    channel2.port1.onmessage = handleMessage;
+    function handleMessage(e) {
+      	para.innerHTML += e.data+(new Date())+'<br />';
+    }
+
+    //iframe传值
+    var ifr = document.querySelector('iframe');
+    var otherWindow = ifr.contentWindow;
+    ifr.addEventListener("load", iframeLoaded, false);
+    
+    function iframeLoaded() {
+        // changeChild(otherWindow,[channel1.port2])
+        otherWindow.postMessage('establish message chennel!', '*', [channel1.port2]);
+    }
+
+    //父子页面传值
+    let popupwin = window.open('http://localhost:8080/page2.html')
+    popupwin.onload = function(e){
+        // popupwin.postMessage('establish message chennel!', '*', [channel2.port2]);
+        changeChild(popupwin)
+    }
+    popupwin.onunload = function(e){
+        var val = popupwin.returnValue;
+        // alert(val);
+    }
+    function changeChild(poster,channel){
+        document.querySelector('button').onclick = function(){
+            poster.postMessage('this message from parents','*',[channel2.port2])
+        }
+    }
+</script>
+</html>
