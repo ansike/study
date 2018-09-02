@@ -17,6 +17,7 @@ Observer.prototype = {
             enumerable: true,
             configurable: true,
             get: function getter () {
+                //只有new Watcher()的时候才会往订阅数组中插入观察者
                 if (Dep.target) {
                     dep.addSub(Dep.target);
                 }
@@ -27,6 +28,7 @@ Observer.prototype = {
                     return;
                 }
                 val = newVal;
+                //改变值的时候会通知所有订阅数组中的观察者进行更新操作
                 dep.notify();
             }
         });
@@ -34,6 +36,7 @@ Observer.prototype = {
 };
 
 function observe(value, vm) {
+    //传入的value必须是对象形式
     if (!value || typeof value !== 'object') {
         return;
     }
@@ -44,9 +47,11 @@ function Dep () {
     this.subs = [];
 }
 Dep.prototype = {
+    //添加新的订阅者
     addSub: function(sub) {
         this.subs.push(sub);
     },
+    //通知所有的观察者进行更新操作
     notify: function() {
         this.subs.forEach(function(sub) {
             sub.update();

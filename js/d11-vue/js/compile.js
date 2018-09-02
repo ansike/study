@@ -1,7 +1,6 @@
 function Compile(el, vm) {
     this.vm = vm;
     this.el = document.querySelector(el);
-    debugger
     this.fragment = null;
     this.init();
 }
@@ -9,10 +8,14 @@ function Compile(el, vm) {
 Compile.prototype = {
     init: function () {
         if (this.el) {
+            //为什么要先放入fragment中，多此一举？
+            //是为了后续的所有操作直接在js中执行，避免频繁操作dom引起性能问题。
             this.fragment = this.nodeToFragment(this.el);
+            //处理所有的文本对象，指令
             this.compileElement(this.fragment);
             this.el.appendChild(this.fragment);
         } else {
+            throw new Error('[selfVue error] 没有根结点！')
             console.log('Dom元素不存在');
         }
     },
@@ -20,6 +23,7 @@ Compile.prototype = {
         var fragment = document.createDocumentFragment();
         var child = el.firstChild;
         //-----------------------------------------------------------------不理解为什么会水平遍历
+        //appendChild会当前元素从原位置移动到当前位置，所以此处能实现横向遍历！！！
         while (child) {
             // 将Dom元素移入fragment中
             fragment.appendChild(child);
@@ -37,7 +41,7 @@ Compile.prototype = {
             if (self.isElementNode(node)) {  
                 self.compile(node);
             } else if (self.isTextNode(node) && reg.test(text)) {
-                self.compileText(node, reg.exec(text)[1]);
+                self.compileText(node, reg.exec(text)[1]);//reg.exec(text)[1]取到{{}}中的值
             }
 
             if (node.childNodes && node.childNodes.length) {

@@ -1,3 +1,10 @@
+/**
+ * 绑定主要使用的是：Object.defineProperty
+ * 数据劫持：get和set
+ * 
+ * @param {*} options 
+ */
+
 function SelfVue (options) {
     var self = this;
     this.data = options.data;
@@ -6,10 +13,12 @@ function SelfVue (options) {
     Object.keys(this.data).forEach(function(key) {
         self.proxyKeys(key);
     });
-    
+    //-----------------------beforeCreate
+    //劫持数据
     observe(this.data);
+    //处理dom。绑定事件。挂载dom
     new Compile(options.el, this);
-    debugger
+
     options.mounted.call(this); // 所有事情处理好后执行mounted函数
 }
 
