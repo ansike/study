@@ -13,36 +13,40 @@
 class PromiseSelf{
     constructor(cb){
         this.status = 'pending';
-        this.data = '';
+        this.resolves = [];
+        this.rejects = [];
         cb(res => {
             this.status = 'success';
-            this.data = res;
+            this.resolves.pop()(res)
         },res => {
             this.status = 'failed';
-            this.data = res;
+            this.rejects.pop()(res)
         })
     }
 
     then(resolve, reject){
-        if(this.status == 'success'){
-            resolve(this.data);
-        }else if(this.status == 'failed' && reject){
-            reject(this.data);
-        }
+        this.resolves.push(resolve);
+        this.rejects.push(reject);
     }
 }
 
 let pro = new PromiseSelf(function(resolve, reject){
-    if(true){
-        resolve('success');
-    }else{
-        reject('failed');
-    }
+    setTimeout(()=>{
+        if(false){
+            console.log(1);
+            resolve('success');
+        }else{
+            reject('failed');
+        }
+    },10)
+    
 })
 pro.then(function(res){
     console.log(res);
 },function(res){
     console.log(res);
 })
+console.log(2);
+debugger
 </script>
 </html>

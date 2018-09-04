@@ -11,36 +11,50 @@
 </body>
 <script>
 function PromiseSelf(cb){
+    let that = this;
     this.status = 'pending';
     this.data = '';
-    let that = this;
+    this.resolves = [];
+    this.rejects = [];
     cb(function(res){
         that.status = 'success';
-        that.data = res;
+        that.resolves.pop()(res);
     },function(res){
         that.status = 'failed';
-        that.data = res;
+        that.rejects.pop()(res);
     })
 }
 
-PromiseSelf.prototype.then = function(resolve, reject){
-    if(this.status == 'success'){
-        resolve(this.data)
-    }else if(this.status == 'failed' && reject){
-        reject(this.data)
-    }
+PromiseSelf.prototype.then = function(onFulfilled){
+    this.resolves.push(onFulfilled);
+}
+PromiseSelf.prototype.resolve = function(value){
+    this.resolves.push(onFulfilled);
+    promise._resolves.forEach(function (callback) {
+        callback(value);
+    });
 }
 let pro = new PromiseSelf(function(resolve, reject){
-    if(false){
-        resolve('success');
-    }else{
-        reject('failed');
-    }
+    setTimeout(function () {
+        if(true){
+            resolve('success');
+        }else{
+            reject('failed');
+        }
+    })
 })
 pro.then(function(res){
     console.log(res);
 },function(res){
     console.log(res);
 })
+// console.log(1)
+let prices = [3,1];
+var containsDuplicate = function(nums) {
+    if(nums.length<2) return false;
+    return (new Set([...nums])).size != nums.length
+};
+console.log(containsDuplicate(prices))
+
 </script>
 </html>
