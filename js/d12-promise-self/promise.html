@@ -27,12 +27,13 @@ class PromiseSelf{
     then(resolve, reject){
         this.resolves.push(resolve);
         this.rejects.push(reject);
+        return this;
     }
 }
 
 let pro = new PromiseSelf(function(resolve, reject){
     setTimeout(()=>{
-        if(false){
+        if(true){
             console.log(1);
             resolve('success');
         }else{
@@ -45,6 +46,10 @@ pro.then(function(res){
     console.log(res);
 },function(res){
     console.log(res);
+}).then(function(){
+    setTimeout(()=>{
+        console.log(111);
+    })
 })
 console.log(2);
 debugger

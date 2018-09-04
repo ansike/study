@@ -10,51 +10,51 @@
     
 </body>
 <script>
-function PromiseSelf(cb){
-    let that = this;
-    this.status = 'pending';
-    this.data = '';
-    this.resolves = [];
-    this.rejects = [];
-    cb(function(res){
-        that.status = 'success';
-        that.resolves.pop()(res);
-    },function(res){
-        that.status = 'failed';
-        that.rejects.pop()(res);
-    })
-}
-
-PromiseSelf.prototype.then = function(onFulfilled){
-    this.resolves.push(onFulfilled);
-}
-PromiseSelf.prototype.resolve = function(value){
-    this.resolves.push(onFulfilled);
-    promise._resolves.forEach(function (callback) {
-        callback(value);
-    });
-}
-let pro = new PromiseSelf(function(resolve, reject){
-    setTimeout(function () {
-        if(true){
-            resolve('success');
-        }else{
-            reject('failed');
-        }
-    })
-})
-pro.then(function(res){
-    console.log(res);
-},function(res){
-    console.log(res);
-})
-// console.log(1)
-let prices = [3,1];
-var containsDuplicate = function(nums) {
-    if(nums.length<2) return false;
-    return (new Set([...nums])).size != nums.length
-};
-console.log(containsDuplicate(prices))
+function ajaxA(success){
+                setTimeout(function(){
+                    console.log("AAAAAAAAAA");
+                    success();
+                }, 3000);
+            }
+                        
+            function ajaxB(success){
+                setTimeout(function(){
+                    console.log("BBBBBBBBBB");
+                    success();
+                }, 2000);
+            }
+            
+            function ajaxC(success){
+                setTimeout(function(){
+                    console.log("CCCCCCCCCC");
+                    success();
+                }, 1000);
+            }
+            
+            function ajaxD(){
+                setTimeout(function(){
+                    console.log("DDDDDDDDD");
+                }, 2000);
+            }
+　　　　　　　　　//模拟异步编程效果
+            function MyPromise(func){
+                var self = this;
+                var count = 0;
+                this.cbklist = [];
+                this.then = function(callback){
+                    this.cbklist.push(callback);
+                    return this;
+                }
+                this.success = function(){
+                    // if(count == self.cbklist.length) return;
+                    self.cbklist[count++](self.success);
+                }
+                setTimeout(function(){
+                    func(self.success);
+                },0);
+            }
+            //强制程序按then的顺序执行
+            new MyPromise(ajaxA).then(ajaxB).then(ajaxC).then(ajaxD);
 
 </script>
 </html>
