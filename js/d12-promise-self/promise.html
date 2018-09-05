@@ -15,12 +15,15 @@ class PromiseSelf{
         this.status = 'pending';
         this.resolves = [];
         this.rejects = [];
-        cb(res => {
-            this.status = 'success';
-            this.resolves.pop()(res)
-        },res => {
-            this.status = 'failed';
-            this.rejects.pop()(res)
+        //避免promise中执行的方法是同步的，此时then还没执行，回调函数还没准备好
+        setTimeout(()=>{
+            cb(res => {
+                this.status = 'success';
+                this.resolves.pop()(res)
+            },res => {
+                this.status = 'failed';
+                this.rejects.pop()(res)
+            })
         })
     }
 
@@ -46,10 +49,6 @@ pro.then(function(res){
     console.log(res);
 },function(res){
     console.log(res);
-}).then(function(){
-    setTimeout(()=>{
-        console.log(111);
-    })
 })
 console.log(2);
 debugger
