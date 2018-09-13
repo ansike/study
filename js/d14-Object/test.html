@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+function Dog(){
+    this.name = 'dog';
+}
+let dog = new Dog();
+console.log(dog);
+
+function create(){
+    let obj = new Object();
+    let Con = [].shift.call(arguments);
+    obj.__proto__ = Con.prototype;
+    let reseult = Con.apply(obj,arguments);
+    return typeof reseult === 'object' ? reseult : obj;
+}
+let dog2 = create(Dog);
+console.log(dog2)
+</script>
+</html>
