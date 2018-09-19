@@ -1,6 +1,6 @@
 Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\Webshell]
-@="URL:Webshell Protocol Handler"
+@="URL:Mine ClassRoom"
 "URL Protocol"=""
 [HKEY_CLASSES_ROOT\Webshell\DefaultIcon]
 @="D:\\usually\\WeChat\\WeChat.exe"
