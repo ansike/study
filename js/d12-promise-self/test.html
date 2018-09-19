@@ -40,21 +40,37 @@ function ajaxD(){
 function MyPromise(func){
     var self = this;
     var count = 0;
-    this.cbklist = [];
-    this.then = function(callback){
-        this.cbklist.push(callback);
+    this._resolves = [];
+    this._rejects = [];
+    this.then = function(resolve, reject){
+        this._resolves.push(resolve);
+        this._rejects.push(reject);
         return this;
     }
-    this.success = function(){
-        // if(count == self.cbklist.length) return;
-        self.cbklist[count++](self.success);
+    this.resolve = function(){
+        self._rejects.shift();
+        self._resolves.shift()(self.resolve, self.reject);
+    }
+    this.reject = function(){
+        self._resolves.shift();
+        self._rejects.shift()(self.resolve, self.reject);
     }
     setTimeout(function(){
-        func(self.success);
+        func(self.resolve, self.reject);
     },0);
 }
 //强制程序按then的顺序执行
-new MyPromise(ajaxA).then(ajaxB).then(ajaxC).then(ajaxD);
+// new MyPromise(ajaxA).then(ajaxB,ajaxC).then(ajaxC).then(ajaxD);
+
+new Promise(ajaxA).then(ajaxB,ajaxC).then(ajaxC).then(ajaxD);
+
+// new Promise(function(resolve, reject){
+//     setTimeout(()=>{
+//         resolve('aaa')
+//     },1000)
+// }).then(function(res){
+//     console.log(res)
+// })
 
 </script>
 </html>
