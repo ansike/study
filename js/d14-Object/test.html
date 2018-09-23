@@ -12,18 +12,32 @@
 <script>
 function Dog(){
     this.name = 'dog';
+    
 }
-let dog = new Dog();
-console.log(dog);
+Dog.getName = function(){
+        console.log('1')
+        console.log(arguments)
+    }
+Dog.prototype.getName = function(){
+    console.log('2');
+}
 
-function create(){
-    let obj = new Object();
-    let Con = [].shift.call(arguments);
-    obj.__proto__ = Con.prototype;
-    let reseult = Con.apply(obj,arguments);
-    return typeof reseult === 'object' ? reseult : obj;
-}
-let dog2 = create(Dog);
-console.log(dog2)
+console.log(new Dog())
+console.log(Dog)
+console.log(new Dog().getName())
+console.log(new Dog.getName(3))
+// let dog = new Dog();
+// console.log(dog);
+
+//new 操作的过程
+// function create(){
+//     let obj = new Object();
+//     let Con = [].shift.call(arguments);
+//     obj.__proto__ = Con.prototype;
+//     let reseult = Con.apply(obj,arguments);
+//     return typeof reseult === 'object' ? reseult : obj;
+// }
+// let dog2 = create(Dog);
+// console.log(dog2)
 </script>
 </html>
