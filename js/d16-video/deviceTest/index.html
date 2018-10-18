@@ -10,7 +10,16 @@
 
 <body>
   <div id="app">
-    <video src="" id="video" controls></video>
+    <video src="" id="video" width="400" height="300" style="border:solid 1px #ccc"></video>
+    <button @click='videoPlay'>打开摄像头</button>
+    <button @click='closeVideo'>关闭摄像头</button>
+    <audio src="" id="audio" width="400" height="300" style="border:solid 1px #ccc"></audio>
+    <button @click='record'>打开录音</button>
+    <button @click='closeRecord'>关闭录音</button>
+    <button @click='audioPlay'>播放录音</button>
+    <br>
+    {{height}}
+    <br />  
     {{message}}
     <span :title="title">悬停</span>
     <br>
