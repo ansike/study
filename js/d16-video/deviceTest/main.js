@@ -28,8 +28,10 @@ var app = new Vue({
         text: '随便其它什么人吃的东西'
       }
     ],
-    height: 0
-
+    height: 0,
+    show: true,
+    shows: true,
+    voice: document.getElementsByClassName('voice')[0]
   },
   mounted() {
     
@@ -45,6 +47,7 @@ var app = new Vue({
     },
     record(){
       let that = this;
+      var vioce = document.getElementsByClassName('voice')[0]
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
       navigator.getUserMedia({ 
@@ -58,7 +61,6 @@ var app = new Vue({
         var audioContext = window.AudioContext || window.WebkitAudioContext;
         var context = new audioContext();
         var audioInput = context.createMediaStreamSource(stream);
-        debugger
         //创建缓存，用来缓存声音  
         config.bufferSize = 4096;
 
@@ -75,7 +77,7 @@ var app = new Vue({
           audioInput.connect(recorder);  
           recorder.connect(context.destination);
         };  
-
+        
         recorder.onaudioprocess = function (e) {
           // console.log(e)
             // audioData.input(e.inputBuffer.getChannelData(0));
@@ -85,16 +87,17 @@ var app = new Vue({
            //绘制条形波动图
            let width = 100;
            for(i=0;i<width;i++){
-              that.height=width*input[input.length*i/width|0];
+              that.height=Math.abs(width*input[input.length*i/width|0]);
+              vioce.style.width = that.height*10 + 'px';
             }
             console.log(that.height)
-            var timeHidden=document.getElementById('audiolength');
-            timeHidden.Value=e.playbackTime;
-            // console.log(timeHidden.Value);
-            if(timeHidden.Value>=60){
-                recorder.disconnect();  
-                setTimeout(saveAudio(),500);
-            }
+            // var timeHidden=document.getElementById('audiolength');
+            // timeHidden.Value=e.playbackTime;
+            // // console.log(timeHidden.Value);
+            // if(timeHidden.Value>=60){
+            //     recorder.disconnect();  
+            //     setTimeout(saveAudio(),500);
+            // }
         };
         this.start();
       }
@@ -133,6 +136,10 @@ var app = new Vue({
       }
 
       navigator.getUserMedia(constraints, successCallback, errorCallback);
+    },  
+    animatecss(e){
+      debugger
+      // Velocity(e.target, { opacity: 1, fontSize: '1.4em' }, { duration: 1000 })
     }
   },
   components: {
