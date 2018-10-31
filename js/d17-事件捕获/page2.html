@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="alert(this.getAttribute('event'))">按钮1</button>
+  <button onclick="alert(this.getAttribute('event'))">按钮2</button>
+  <p onclick="alert(this.getAttribute('event'))">p1 <span></span> </p>
+  <p onclick="alert(this.getAttribute('event'))">p2</p>
+</body>
+<script>
+  let temp = new Map();
+  dealDom(document.body);
+
+  function dealDom(dom) {
+    let nodes = dom.children;
+    for (let index = 0; index < nodes.length; index++) {
+      const element = nodes[index];
+      if (element.getAttribute('event'))
+        continue;
+      temp.set(index, element)
+      element.setAttribute('event', index);
+    }
+    console.log(temp)
+  }
+
+  // 注册消息事件监听，对来自 myIframe 框架的消息进行处理
+  window.addEventListener('message', function (e) {
+    console.log('child', e.data)
+    console.log(temp.get(Number(e.data)))
+    temp.get(Number(e.data)).click();
+    // if (e.data.act == 'article') {
+    //   alert(e.data.msg.subject);
+    //   // 向父窗框返回响应结果
+    //   window.parent.postMessage({
+    //     act: 'response',
+    //     msg: {
+    //       answer: '我接收到啦！'
+    //     }
+    //   }, '*');
+    // } else {
+    //   alert('未定义的消息: ' + e.data.act);
+    // }
+  }, false);
+</script>
+
+</html>

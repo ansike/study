@@ -14,13 +14,13 @@
 </body>
 <script>
     var channel1 = new MessageChannel();
-    var channel2 = new MessageChannel();
+    // var channel2 = new MessageChannel();
     var para = document.querySelector('p');
     
     channel1.port1.onmessage = handleMessage;
-    channel2.port1.onmessage = handleMessage;
+    // channel2.port1.onmessage = handleMessage;
     function handleMessage(e) {
-      	para.innerHTML += e.data+(new Date())+'<br />';
+      para.innerHTML += e.data+(new Date())+'<br />';
     }
 
     //iframe传值
@@ -29,24 +29,26 @@
     ifr.addEventListener("load", iframeLoaded, false);
     
     function iframeLoaded() {
-        // changeChild(otherWindow,[channel1.port2])
-        otherWindow.postMessage('establish message chennel!', '*', [channel1.port2]);
+      // changeChild(otherWindow,[channel1.port2])
+      // otherWindow.postMessage('establish message chennel!', '*', [channel1.port2]);
+      document.querySelector('button').onclick = function(){
+        otherWindow.postMessage('this message from parents','*',[channel1.port2])
+      }
     }
-
     //父子页面传值
-    let popupwin = window.open('http://localhost:8080/page2.html')
-    popupwin.onload = function(e){
-        // popupwin.postMessage('establish message chennel!', '*', [channel2.port2]);
-        changeChild(popupwin)
-    }
-    popupwin.onunload = function(e){
-        var val = popupwin.returnValue;
-        // alert(val);
-    }
-    function changeChild(poster,channel){
-        document.querySelector('button').onclick = function(){
-            poster.postMessage('this message from parents','*',[channel2.port2])
-        }
-    }
+    // let popupwin = window.open('http://localhost:8080/page2.html')
+    // popupwin.onload = function(e){
+    //     // popupwin.postMessage('establish message chennel!', '*', [channel2.port2]);
+    //     changeChild(popupwin)
+    // }
+    // popupwin.onunload = function(e){
+    //     var val = popupwin.returnValue;
+    //     // alert(val);
+    // }
+    // function changeChild(poster,channel){
+    //     document.querySelector('button').onclick = function(){
+    //         poster.postMessage('this message from parents','*',[channel2.port2])
+    //     }
+    // }
 </script>
 </html>
