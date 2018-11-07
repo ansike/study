@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./cropper.min.css">
+  <style>
+    .box {
+      width: 500px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <img id="image" src="eg_tulip.jpg">
+  </div>
+  <button id="cropbtn">裁切</button>
+  <img id="saveImg" src="" alt="">
+</body>
+<script src="./cropper.js"></script>
+<script>
+//参考地址 https://blog.csdn.net/weixin_38023551/article/details/78792400
+//裁切的时候涉及到canvas，使用服务，否则会报跨域的问题
+  var cropper = new Cropper(image, {
+    //oprions参数看参考地址就够了
+    aspectRatio: 16 / 9,//裁切比例，根据自己的业务设置。
+    viewMode: 1
+  });
+  document.querySelector('#cropbtn').onclick = function () {
+    var base64 = cropper.getCroppedCanvas().toDataURL('image/jpeg')
+    document.querySelector('#saveImg').setAttribute('src', base64);
+    //console.log(base64);
+  }
+</script>
+
+</html>
