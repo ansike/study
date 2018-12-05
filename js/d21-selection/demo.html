@@ -1,0 +1,49 @@
+<html lang="en">
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #box {
+      border: solid 1px #ccc;
+      -webkit-user-modify: read-write-plaintext-only
+    }
+
+    c {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box" contenteditable="true"></div>
+</body>
+<script>
+  var box = document.getElementById('box');
+  box.onclick = onclick;
+
+  function onclick(e) {
+    let selection = window.getSelection(),
+      selectStr = selection.toString(),
+      range = selection.getRangeAt(0),
+      wholeText = range.commonAncestorContainer.wholeText;
+
+    if (!selectStr) return;
+    if (wholeText == selectStr) {
+      let text = range.extractContents().textContent;
+      return;
+    }
+    if (selection.anchorNode.parentElement.tagName === 'C' || selection.focusNode.parentElement.tagName === 'C') {
+      console.log('不能标记已标红的文本');
+      return;
+    }
+    let selfElement = document.createElement('C');
+    range.surroundContents(selfElement);
+    console.log(selectStr)
+  }
+</script>
+
+</html>

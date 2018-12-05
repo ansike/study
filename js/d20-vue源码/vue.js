@@ -151,7 +151,7 @@
   }
 
   /**
-   * Check whether the object has the property.
+   * Check whether the object has the property.检查当前对象是否有该属性
    */
   var hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -160,7 +160,7 @@
   }
 
   /**
-   * Create a cached version of a pure function.
+   * Create a cached version of a pure function.创建一个缓冲版本的纯函数
    */
   function cached(fn) {
     var cache = Object.create(null);
@@ -171,7 +171,7 @@
   }
 
   /**
-   * Camelize a hyphen-delimited string.
+   * Camelize a hyphen-delimited string.驼峰化一个连字符连接的字符串
    */
   var camelizeRE = /-(\w)/g;
   var camelize = cached(function (str) {
