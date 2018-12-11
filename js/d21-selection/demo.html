@@ -52,6 +52,7 @@
         console.log("不能标记已标红的文本");
         return;
       }
+      debugger
       let selfElement = document.createElement("C");
       range.surroundContents(selfElement);
       selection.collapseToEnd();
