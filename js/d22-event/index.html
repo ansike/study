@@ -18,8 +18,8 @@
     //e.isTrusted===false  代表模拟触发的
     console.log(e.isTrusted);
   })
-  let event = document.createEvent('Event');
-  event.initEvent('click', true, true, document.defaultView);
+  let event = document.createEvent('event');
+  event.initEvent('click', true, true);
   btn.dispatchEvent(event);
 </script>
 
