@@ -60,18 +60,18 @@
   <p><em></em></p>
 </body>
 <script>
-  let tem = ['1', '2', '3'];
-  console.log(tem.map(parseInt));
-  // parseIntx需要的参数和map传给的参数不一致导致的
-  for (var index = 0; index < tem.length; index++) {
-    // !function (index) {
-      setTimeout(function () {
-        console.log(index);
-      }(index), 1000);
-    // }(index)
+  var a = 1;
+  console.log(test());
 
-    // const element = array[index];
-
+  function test(params) {
+    if (true) {
+      a++;
+      if (a == 4) {
+        return 1;
+      } else {
+        return test();
+      }
+    }
   }
 </script>
 
