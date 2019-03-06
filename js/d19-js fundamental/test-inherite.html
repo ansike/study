@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  class Parent {
+    constructor(name) {
+      this.name = name;
+    }
+
+    sayName() {
+      console.log('this.name', this.name);
+    }
+  }
+
+  class Child extends Parent {
+    constructor(name, age) {
+      super(name);
+      this.age = age;
+    }
+
+    sayAge() {
+      console.log('this.age', this.age);
+    }
+  }
+
+  let child = new Child('anne', 23);
+  child.sayName();
+  child.sayAge();
+
+  console.log('es6 原型继承的本质');
+  console.log(child)
+  console.log('实例的原型指向父类原型对象, child.__proto__ === Child.prototype', child.__proto__ === Child.prototype);
+  console.log('Child.__proto', Child.__proto__);
+  console.log('Child.__proto__ === Parent', Child.__proto__ === Parent);
+  console.log(Child)
+  console.log(Parent)
+  console.log('Parent.prototype', Parent.prototype)
+</script>
+
+</html>
