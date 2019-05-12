@@ -1,12 +1,22 @@
 let upper = val => val.toUpperCase();
-let first = val => val[0];
-let reverse = val => val.split('').reverse();
-console.log(upper('object'));
-console.log(first('object'));
-console.log(reverse('object'));
+let first = val => val[2];
+let reverse = val => {
+  let temp = val.split('').reverse();
+  console.log("reverse", temp)
+  return temp;
+}
+let getfirst = val => {
+  let temp = val.substr(0, 3);
+  console.log('getfirst',
+    temp)
+  return temp;
+}
+// console.log(upper('object'));
+// console.log(first('object'));
+// console.log(reverse('object'));
 
 
-let compose = function (...func) {
+let compose = function (...funcs) {
   if(funcs.length ===0) {
     return arg => arg
   }
@@ -15,9 +25,10 @@ let compose = function (...func) {
     return funcs[0]
   }
 
-  return func.reduce((a, b) => (...args) => a(b(...args)));
+  return funcs.reduce((a, b) => (...args) => a(b(...args)));
 }
 
-let temp = compose(upper, first, reverse);
+let temp = compose(upper, first, reverse, getfirst);
 
-console.log(temp('object'));
+console.log('temp',
+  temp('object'));

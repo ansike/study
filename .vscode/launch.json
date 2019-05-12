@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/js/d27-label语句/label.js"
+      "program": "${workspaceFolder}/js/d31-review/sort.js"
     }
   ]
 }
