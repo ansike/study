@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/js/d31-review/sort.js"
+      "program": "${workspaceFolder}/js/d31-review/k大元素.js"
     }
   ]
 }

@@ -1,34 +1,35 @@
-let upper = val => val.toUpperCase();
-let first = val => val[2];
-let reverse = val => {
-  let temp = val.split('').reverse();
-  console.log("reverse", temp)
-  return temp;
-}
-let getfirst = val => {
-  let temp = val.substr(0, 3);
-  console.log('getfirst',
-    temp)
-  return temp;
-}
-// console.log(upper('object'));
-// console.log(first('object'));
-// console.log(reverse('object'));
-
-
-let compose = function (...funcs) {
-  if(funcs.length ===0) {
-    return arg => arg
+function compose(...arg) {
+  if (arg.length == 0) return arg => arg;
+  if (arg.length === 1) {
+    return arg[0];
   }
-
-  if(funcs.length ===1) {
-    return funcs[0]
-  }
-
-  return funcs.reduce((a, b) => (...args) => a(b(...args)));
+  return arg.reduce((prev, cur) => {
+    return (...arg) => {
+      return prev(cur(...arg));
+    };
+  });
 }
 
-let temp = compose(upper, first, reverse, getfirst);
+const a = val => {
+  console.log("a" + val);
+};
+const b = val => {
+  console.log("b" + val);
+  return val;
+};
+const c = val => {
+  console.log("c" + val);
+  return val;
+};
+let t = compose(
+  a,
+  b,
+  c
+);
+t(1);
+// console.log:c1 b1 a1
 
-console.log('temp',
-  temp('object'));
+// reduce 返回的过程
+// times prev            cur return
+// 1     a               b   val=> a(b(val))
+// 2     val=> a(b(val)) c   val=> (val=> a(b(val)))(c(val))

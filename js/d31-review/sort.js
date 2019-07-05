@@ -1,13 +1,56 @@
-const data = [6, 3, -1, 5];
+const data = [6, 3, -1, 5, 31, 0];
 function selfSort(arr) {
   if (arr instanceof Array) {
     // return bubbleSort(arr);
-    return quickSort(arr);
+    // return quickSort(arr);
+    // return insertSort(arr);
+    return selectSort(arr);
   } else {
     throw new Error("参数类型错误~");
   }
 }
-
+/**
+ * @Description: 选择排序(不稳定)
+ * @param {Array}
+ * @return: []
+ */
+function selectSort(arr) {
+  if (!arr instanceof Array) {
+    return -1;
+  }
+  for (let i = 0, len = arr.length; i < len; i++) {
+    let min = arr[i];
+    let index = i;
+    for (let j = i; j < len; j++) {
+      if (arr[j] < min) {
+        index = j;
+      }
+    }
+    arr[i] = arr[index];
+    arr[index] = min;
+  }
+  return arr;
+}
+/**
+ * @Description: 插入排序(稳定)
+ * @param {Array}
+ * @return: []
+ */
+function insertSort(arr) {
+  if (!arr instanceof Array) {
+    return -1;
+  }
+  for (let i = 1, len = arr.length; i < len; i++) {
+    let pol = arr[i];
+    for (let j = i - 1; j >= 0; j--) {
+      if (pol < arr[j]) {
+        arr[j + 1] = arr[j];
+        arr[j] = pol;
+      }
+    }
+  }
+  return arr;
+}
 /**
  * @Description: 快排
  * @param {Array}
