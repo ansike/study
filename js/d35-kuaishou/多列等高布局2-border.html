@@ -1,0 +1,71 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-08-19 12:04:52
+ * @LastEditTime: 2019-09-02 08:27:11
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      .box {
+        border-left: 200px solid #ccc;
+        background: green;
+      }
+      .box:after {
+        content: "";
+        display: block;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+      }
+      .child1 {
+        width: 200px;
+        float: left;
+        margin-left: -200px;
+      }
+      .child2 {
+        width: 200px;
+      }
+      .child {
+        width: 200px;
+        height: 30px;
+        background: red;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="child1"></div>
+      <div class="child2"></div>
+    </div>
+    <button id="add1">add1</button>
+    <button id="add2">add2</button>
+  </body>
+  <script>
+    let add1 = document.getElementById("add1");
+    let add2 = document.getElementById("add2");
+    let child1 = document.getElementsByClassName("child1")[0];
+    let child2 = document.getElementsByClassName("child2")[0];
+    add1.onclick = function add1() {
+      let dev = document.createElement("div");
+      dev.className = "child";
+      child1.appendChild(dev);
+    };
+    add2.onclick = function add2() {
+      let dev = document.createElement("div");
+      dev.className = "child";
+      child2.appendChild(dev);
+    };
+  </script>
+</html>

@@ -1,0 +1,58 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-08-13 08:28:59
+ * @LastEditTime: 2019-08-26 21:51:46
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      /* div {
+        width: 100px;
+        color: red;
+        padding: 10px;
+        border: solid #ccc 20px;
+        margin: 30px;
+      } */
+      div.title {
+        /* 101 */
+        color: blue;
+      }
+      #title {
+        /* 1000 */
+        color: yellow
+      }
+      .classB {
+        /* 1000 */
+        color: red;
+      }
+      .classA {
+        /* 1000 */
+        color: blue;
+      }
+      .parent{
+        width: 200px;
+        padding: 10px;
+        border: solid 10px #ccc;
+      }
+      .children{
+        width: 100%;
+        height: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title" id="title">1234567</div>
+    <!-- 关注在style中的css描述的顺序 -->
+    <p class="classB classA">asdf</p>
+    <div class="parent"> 
+      <div class="children"></div>
+    </div>
+  </body>
+</html>

@@ -1,3 +1,10 @@
+/*
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-03-06 09:14:40
+ * @LastEditTime: 2019-08-31 01:04:55
+ */
 function Observer(data) {
     this.data = data;
     this.walk(data);

@@ -1,0 +1,45 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-08-20 11:52:47
+ * @LastEditTime: 2019-08-20 19:05:46
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    function createWorker(f) {
+      let blob = new Blob(["(" + f.toString() + ")()"]);
+      let url = window.URL.createObjectURL(blob);
+      let worker = new Worker(url);
+      return worker;
+    }
+
+    function testWorker() {
+      times = 1;
+      let t = setInterval(() => {
+        if (times === 4) {
+          clearInterval(t);
+          t = null;
+          postMessage({ cmd: "close" });
+        }
+        times++;
+        console.log(new Date());
+      }, 1000);
+    }
+    let worker = createWorker(testWorker);
+    worker.onmessage = res => {
+      if (res.data.cmd === "close") {
+        worker.terminate();
+        console.log("close worker")
+      }
+    };
+  </script>
+</html>

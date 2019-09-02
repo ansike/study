@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/js/d31-review/k大元素.js"
+      "program": "${workspaceFolder}/js/d11-vue/computed/index.js"
     }
   ]
 }

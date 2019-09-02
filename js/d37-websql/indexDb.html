@@ -1,0 +1,75 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-08-20 09:15:28
+ * @LastEditTime: 2019-08-20 09:25:08
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    var request = window.indexedDB.open("test", 1);
+    request.onerror = function(event) {
+      console.log("数据库打开报错");
+    };
+    var db;
+    request.onsuccess = function(event) {
+      db = request.result;
+      console.log("数据库打开成功");
+      add();
+    };
+    request.onupgradeneeded = function(event) {
+      db = event.target.result;
+      var objectStore;
+      // if (!db.objectStoreNames.contains("person")) {
+      objectStore = db.createObjectStore("person", { keyPath: "id" });
+      // }
+      objectStore.createIndex("name", "name", { unique: false });
+      objectStore.createIndex("email", "email", { unique: true });
+      add();
+    };
+
+    function add() {
+      var request = db
+        .transaction(["person"], "readwrite")
+        .objectStore("person")
+        .add({ id: 1, name: "张三", age: 24, email: "zhangsan@example.com" });
+
+      request.onsuccess = function(event) {
+        console.log("数据写入成功");
+        read();
+      };
+
+      request.onerror = function(event) {
+        console.log("数据写入失败");
+        read();
+      };
+    }
+    function read() {
+      var transaction = db.transaction(["person"]);
+      var objectStore = transaction.objectStore("person");
+      var request = objectStore.get(1);
+
+      request.onerror = function(event) {
+        console.log("事务失败");
+      };
+
+      request.onsuccess = function(event) {
+        if (request.result) {
+          console.log("Name: " + request.result.name);
+          console.log("Age: " + request.result.age);
+          console.log("Email: " + request.result.email);
+        } else {
+          console.log("未获得数据记录");
+        }
+      };
+    }
+  </script>
+</html>
