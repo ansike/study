@@ -3,7 +3,7 @@
  * @Author: Ask
  * @LastEditors: Ask
  * @Date: 2019-08-17 10:08:44
- * @LastEditTime: 2019-08-17 17:40:02
+ * @LastEditTime: 2019-10-03 11:18:20
  */
 // ========================类型判断一=================================
 // const checkType = (val, type)=>{
@@ -44,16 +44,18 @@ const curry = (fn, arr = []) => {
 const add = (a, b, c, d, e) => {
   return a + b + c + d + e;
 };
-console.log(curry(add)(1, 2)(3, 4)(5));
+console.log(curry(add)(1, 2)(3, 4)(6));
 
-// 
-const types = ["String", "Number", "Boolean"];
+//
+let types = ['String', 'Number', 'Boolean'];
 let utils = {};
 types.forEach(type => {
-  utils["is" + type] = curry(
-    item => Object.prototype.toString.call(item) === `[object ${type}]`
-  );
+  utils['is' + type] = item =>
+    Object.prototype.toString.call(item) === `[object ${type}]`;
 });
-
-console.log(utils.isString("456"));
+console.log(utils.isString('456'));
 console.log(utils.isNumber(456));
+console.log(utils.isNumber+1);
+console.log(utils.isBoolean('1'));
+types[2] = "Function";
+console.log(utils.isBoolean(true));

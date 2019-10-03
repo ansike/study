@@ -3,7 +3,7 @@
  * @Author: Ask
  * @LastEditors: Ask
  * @Date: 2019-08-17 10:29:59
- * @LastEditTime: 2019-08-17 10:33:30
+ * @LastEditTime: 2019-09-30 08:40:06
  */
 
 const after = (times, fn) => {
@@ -20,3 +20,9 @@ const anyMethods = after(3, () => {
 anyMethods();
 anyMethods();
 anyMethods();
+
+const anyMethods2 = after(3, () => {
+  console.log('执行');
+});
+anyMethods2();
+anyMethods2();
