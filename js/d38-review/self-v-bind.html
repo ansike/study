@@ -1,0 +1,53 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-10-14 19:18:05
+ * @LastEditTime: 2019-10-14 19:57:21
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="ipt" />
+    <p id="content" onclick="pClick()"></p>
+  </body>
+  <script>
+    let ipt = document.getElementById('ipt');
+    let content = document.getElementById('content');
+    let data = {
+      iptData: ''
+    };
+    let initData = ipt.value;
+    data.iptData = ipt.value;
+    
+    Object.defineProperties(data, {
+      iptData: {
+        get(val) {
+          // 在vue源码中在此处进行依赖收集
+          return initData;
+        },
+        set(val, oldVal) {
+          // set数据的时候,input和dom都会改变
+          content.innerHTML = val;
+          ipt.value = val;
+          // 中间变量值,为了使用defineProperties使用
+          initData = val;
+        }
+      }
+    });
+
+    ipt.onkeyup = function(e) {
+      data.iptData = this.value;
+    };
+
+    content.onclick = function(e) {
+      data.iptData = data.iptData + '1';
+    };
+  </script>
+</html>

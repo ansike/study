@@ -1,0 +1,40 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-10-22 00:26:25
+ * @LastEditTime: 2019-10-23 09:17:42
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>帧动画</title>
+    <style>
+      #node {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="node"></div>
+  </body>
+  <script>
+    let node = document.querySelector('#node');
+    let t1 = Date.now();
+    // console.log();
+    let deal = timestamp => {
+      let t2 = Date.now();
+      if (t2 - t1 > 1000) {
+        cancelAnimationFrame(deal);
+      } else {
+        requestAnimationFrame(deal);
+      }
+      console.log(t2, timestamp);
+    };
+    requestAnimationFrame(deal);
+  </script>
+</html>

@@ -3,7 +3,7 @@
  * @Author: Ask
  * @LastEditors: Ask
  * @Date: 2019-10-03 14:35:21
- * @LastEditTime: 2019-10-03 18:09:00
+ * @LastEditTime: 2019-10-05 11:08:12
  */
 // 快速排序
 // let arr = [11, 22, 3, 41, 9, 20];
@@ -29,8 +29,8 @@
 //   deal(arr, 0, arr.length - 1);
 //   return arr;
 // }
-// let arr4 = [7, 9, 2, 3, 41, 5, 6, 8, 1];
-// console.log(quickSort(arr4, 5));
+// let arr4 = [4, 52, 1, 4, 6, 3];
+// console.log(quickSort(arr4));
 
 // let arr = [11, 22, 3, 41, 9, 20];
 
@@ -109,62 +109,69 @@
 // }
 // console.log(insertSort(arr));
 
-// 归并代码
+// 归并代码 时间复杂度: O(nlogn) 最好时间复杂度是O(nlogn),最坏时间复杂度是O(nlogn), 空间复杂度:O(n), 是稳定的排序算法
 
-function mergeSort(arr) {
-  let deal = (arr, l, r) => {
-    let tempL = l;
-    let tempR = r;
-    let middle = Math.floor((l + r) / 2);
-    if (l >= r) return;
-    deal(arr, l, middle);
-    deal(arr, middle + 1, r);
-    console.log(
-      'splice',
-      arr.slice(l, middle + 1),
-      arr.slice(middle + 1, r + 1),
-      arr
-    );
-    arr.splice(
-      l,
-      r - l + 1,
-      ...merge(arr.slice(l, middle + 1), arr.slice(middle + 1, r + 1))
-    );
-  };
-  deal(arr, 0, arr.length - 1);
-  return arr;
-}
+// function mergeSort(arr) {
+//   let deal = (arr, l, r) => {
+//     let middle = Math.floor((l + r) / 2);
+//     if (l >= r) return;
+//     deal(arr, l, middle);
+//     deal(arr, middle + 1, r);
+//     console.log(
+//       'splice',
+//       arr.slice(l, middle + 1),
+//       arr.slice(middle + 1, r + 1),
+//       arr
+//     );
+//     arr.splice(
+//       l,
+//       r - l + 1,
+//       ...merge(arr.slice(l, middle + 1), arr.slice(middle + 1, r + 1))
+//     );
+//   };
+//   deal(arr, 0, arr.length - 1);
+//   return arr;
+// }
 
-console.log('mergeSort', mergeSort([4, 1, 3, 5, 8, 12, 22, 11]));
+// console.log('mergeSort', mergeSort([4, 1, 3, 5, 8, 12, 22, 11, 10]));
 
-// 合并两组有序数组
-function merge(arr1, arr2) {
-  let arr = [];
-  let length = arr1.length + arr2.length;
-  let index1 = 0;
-  let index2 = 0;
-  for (let index = 0; index < length; index++) {
-    if (!arr1[index1]) {
-      arr = arr.concat(arr2.slice(index2));
-      break;
-    }
-    if (!arr2[index2]) {
-      arr = arr.concat(arr1.slice(index1));
-      break;
-    }
+// // 合并两组有序数组
+// function merge(arr1, arr2) {
+//   let arr = [];
+//   let length = arr1.length + arr2.length;
+//   let index1 = 0;
+//   let index2 = 0;
+//   for (let index = 0; index < length; index++) {
+//     if (!arr1[index1]) {
+//       arr = arr.concat(arr2.slice(index2));
+//       break;
+//     }
+//     if (!arr2[index2]) {
+//       arr = arr.concat(arr1.slice(index1));
+//       break;
+//     }
 
-    if (arr1[index1] < arr2[index2]) {
-      if (index1 < arr1.length) {
-        arr.push(arr1[index1]);
-        index1++;
-      }
-    } else {
-      if (index2 < arr2.length) {
-        arr.push(arr2[index2]);
-        index2++;
-      }
-    }
-  }
-  return arr;
-}
+//     if (arr1[index1] < arr2[index2]) {
+//       if (index1 < arr1.length) {
+//         arr.push(arr1[index1]);
+//         index1++;
+//       }
+//     } else {
+//       if (index2 < arr2.length) {
+//         arr.push(arr2[index2]);
+//         index2++;
+//       }
+//     }
+//   }
+//   return arr;
+// }
+
 // console.log(merge([3], [2]));
+
+// function heapSort(arr) {
+//   let buildMaxHeap = (arr) => {
+
+//   };
+//   return arr;
+// }
+// console.log(heapSort([1, 21, 3, 2, 32, 11, 5]));

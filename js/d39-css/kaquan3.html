@@ -1,0 +1,53 @@
+<!--
+ * @Description: 锯齿边的颜色和背景色一致,假锯齿
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-10-29 19:53:11
+ * @LastEditTime: 2019-10-29 22:54:22
+ -->
+<html lang="zh-cn" style="font-size: 100px;">
+  <head>
+    <meta charset="UTF-8" />
+    <title>验证券样式</title>
+    <style>
+      body {
+        background: linear-gradient(green, blue);
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(
+              circle at 0.5rem top,
+              transparent 0.1rem,
+              #28a4f2 0
+            )
+            top / 1rem 51% no-repeat,
+          radial-gradient(
+              circle at 0.5rem bottom,
+              transparent 0.1rem,
+              #28a4f2 0
+            )
+            bottom / 1rem 51% no-repeat;
+        /* no-repeat; */
+        filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.3));
+      }
+      .box::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 5px;
+        top: 0;
+        right: -5px;
+        background-image: radial-gradient(
+          10px circle at 5px 10px,
+          transparent 5px,
+          #eeeeee 5px
+        );
+        background-size: 5px 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

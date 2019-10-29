@@ -1,0 +1,46 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-10-14 20:48:07
+ * @LastEditTime: 2019-10-14 20:55:07
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      @keyframes rota {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      #box {
+        width: 100px;
+        height: 100px;
+        background: red;
+        animation: rota linear 3s 0s infinite;
+      }
+      #test1 {
+        width: 100px;
+        height: 100px;
+        background: blue;
+        transform: translate(100px, 100px) rotate(45deg);
+      }
+      #test2 {
+        width: 100px;
+        height: 100px;
+        background: green;
+        transform: rotate(45deg) translate(100px, 100px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+    <div id="test1"></div>
+    <div id="test2"></div>
+  </body>
+</html>

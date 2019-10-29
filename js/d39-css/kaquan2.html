@@ -1,0 +1,54 @@
+<!--
+ * @Description: 锯齿边的颜色和背景色一致,假锯齿
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-10-29 19:53:11
+ * @LastEditTime: 2019-10-29 20:29:31
+ -->
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <title>验证券样式</title>
+    <style>
+      .box {
+        /* 中间镂空 */
+        /* width: 200px;
+        height: 200px;
+        border-radius: 100%;
+        border: solid 10px #ccc;
+        background: radial-gradient(circle,red 30%,transparent 0),blue;
+        background-size: 30px 30px;  */
+
+        /* 一个元素两个色块 */
+        /* width: 200px;
+        height: 200px;
+        border-radius: 100%;
+        background: radial-gradient(circle,red 30%,transparent 0),blue; */
+
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 1px solid #00caf5;
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.8) inset;
+        background: radial-gradient(circle, #00caf5 9px, transparent 10px),
+          repeating-radial-gradient(
+            ellipse,
+            #00caf5 0,
+            #00caf5 4px,
+            transparent 5px,
+            transparent 20px,
+            #00caf5 21px,
+            #00caf5 25px,
+            transparent 26px,
+            transparent 50px
+          ),
+          #fff;
+        background-size: 30px 30px, 90px 90px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <a href="https://leaverou.github.io/css3patterns/#">css3 patterns gallery</a>
+  </body>
+</html>

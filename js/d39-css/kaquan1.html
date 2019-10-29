@@ -1,0 +1,50 @@
+<!--
+ * @Description: 锯齿边的颜色和背景色一致,假锯齿
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-10-29 19:53:11
+ * @LastEditTime: 2019-10-29 19:57:37
+ -->
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <title>验证券样式</title>
+    <style>
+      body {
+        background-color: #e2dfdf;
+      }
+      .div {
+        position: relative;
+        width: 200px;
+        height: 100px;
+
+        margin: 100px auto;
+        background-color: #fff;
+      }
+      .yuan1 {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+        background-color: #e2dfdf;
+        left: -10px;
+        top: 40px;
+      }
+      .yuan2 {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+        background-color: #e2dfdf;
+        right: -10px;
+        top: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div">
+      <div class="yuan1"></div>
+      <div class="yuan2"></div>
+    </div>
+  </body>
+</html>
