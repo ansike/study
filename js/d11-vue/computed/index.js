@@ -3,7 +3,7 @@
  * @Author: Ask
  * @LastEditors: Ask
  * @Date: 2019-08-30 22:51:24
- * @LastEditTime: 2019-08-31 02:10:46
+ * @LastEditTime: 2019-12-19 22:42:13
  */
 
 class Dep {
@@ -34,9 +34,6 @@ function popTarget() {
 }
 
 class Watcher {
-  // getter: Function;
-  // key: string;
-  // vm: object;
   constructor(vm, key, getter) {
     this.vm = vm;
     this.dep = new Dep();

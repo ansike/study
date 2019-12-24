@@ -50,8 +50,8 @@ function observe(value, vm) {
     return new Observer(value);
 };
 
-function Dep () {
-    this.subs = [];
+function Dep() {
+  this.subs = [];
 }
 Dep.prototype = {
     //添加新的订阅者
