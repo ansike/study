@@ -1,4 +1,4 @@
-(function(modules) {
+(function (modules) {
   let installedModules = {};
   var installedChunks = {
     main: 0
@@ -25,12 +25,13 @@
   }
 
   // 加载分包资源,使用jsonp的形式
-  self_require.e = function(moduleId) {
+  self_require.e = function (moduleId) {
     let promises = [];
 
     let promise = new Promise((resolve, reject) => {
       installedChunks[moduleId] = [resolve, reject];
     });
+
     promises.push(promise);
 
     var script = document.createElement("script");
@@ -47,17 +48,23 @@
   // 入口文件编写
   return self_require("./main.js");
 })({
-  "./main.js": function(module, self_require) {
+  "./main.js": function (module, self_require) {
     const b = self_require("./b.js");
-    self_require
-      .e("./a.js")
-      .then(() => self_require("./a.js"))
-      .then(res => {
-        console.log("a", res.a);
-      });
+    const btn = document.createElement('button');
+    btn.innerText = "加载A"
+    btn.onclick = () => {
+      console.log("load A");
+      self_require
+        .e("./a.js")
+        .then(() => self_require("./a.js"))
+        .then(res => {
+          console.log("a", res.a);
+        });
+    }
+    document.body.appendChild(btn);
     console.log("b", b.b);
   },
-  "./b.js": function(module, self_require) {
+  "./b.js": function (module, self_require) {
     console.log("b.js");
     self_require
       .e("./c.js")

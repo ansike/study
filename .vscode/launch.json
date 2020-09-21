@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/js/d44-tools/currying.js"
+      "program": "${workspaceFolder}/js/d46-wechat/quickSort.js"
     }
   ]
 }
