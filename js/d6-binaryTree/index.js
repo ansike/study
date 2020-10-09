@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>二叉树</title>
-</head>
-
-<body>
-</body>
-<script>
-//----------------------------------------------将数组构建成二叉树----------------------------------
 
 function Node() { //bt节点
     this.text = ''; //节点的文本
@@ -21,6 +10,7 @@ var strText = "";
 var charecters = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 var len = charecters.length; //数组的长度
 var nodes = new Array(); //创建一个临时数组，用于存放二叉树节点
+
 //循环创建二叉树节点存放到数组中
 for (var i = 0; i < len; i++) {
     var node = new Node();
@@ -31,7 +21,6 @@ console.log(nodes)
 
 function buildBt2() {
     index = 0; //索引从0开始
-
     //循环建立二叉树子节点的引用
     while (index < len) {
         var leftIndex = 2 * index + 1, //当前节点左孩子索引
@@ -43,6 +32,7 @@ function buildBt2() {
         index++;
     }
 }
+
 buildBt2()
 console.log(nodes[0])
 
@@ -63,6 +53,7 @@ function buildBt1(node, i) {
         buildBt1(childNode, rightIndex);
     }
 }
+
 var node = new Node();
 node.text = charecters[0];
 buildBt1(node, 0); //索引i是从0开始构建
@@ -120,6 +111,3 @@ function LastConsole(node,arr) {
 }
 LastConsole(node,arr);
 console.log(arr)
-</script>
-
-</html>
