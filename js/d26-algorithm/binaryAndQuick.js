@@ -9,6 +9,7 @@ function main() {
   console.log(arr);
 
 }
+
 function binary(arr, left, right, value) {
   if (left < right) {
     let mid = quick(arr, left, right);
@@ -21,6 +22,7 @@ function binary(arr, left, right, value) {
     }
   }
 }
+
 function quick(arr, left, right) {
   if (left < right) {
     let base = arr[left];

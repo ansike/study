@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      background-color: blue;
+      height: 20px;
+      width: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+  <button id="btn">btn</button>
+</body>
+<script>
+  const box = document.querySelector("#box");
+  const btn = document.querySelector("#btn");
+
+  const change = () => {
+    console.log('宽度', box.offsetWidth);
+    box.style.width = box.offsetWidth + 1 + 'px'
+    if (box.offsetWidth < 100) {
+      console.log('再来一次', box.offsetWidth);
+      requestAnimationFrame(change)
+    }
+  }
+
+  btn.onclick = () => {
+    requestAnimationFrame(change)
+  }
+</script>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  function sleep(time) {
+    const start = Date.now();
+    console.time()
+    while (start + time > Date.now()) {}
+    console.timeEnd()
+  }
+
+  workArr = [
+    () => {
+      console.log("A1 start");
+      sleep(10)
+      console.log("A1 end");
+    },
+    () => {
+      console.log("A2 start");
+      sleep(5)
+      console.log("A2 end");
+    },
+    () => {
+      console.log("A3 start");
+      sleep(5)
+      console.log("A3 end");
+    },
+    () => {
+      console.log("A4 start");
+      sleep(5)
+      console.log("A4 end");
+    },
+    () => {
+      console.log("A5 start");
+      sleep(5)
+      console.log("A5 end");
+    }
+  ]
+  requestIdleCallback(workLoop);
+  // while (workArr.length > 0) {
+  //     console.log('次数：', );
+  //     performanceUnitOfWork();
+  //   }
+
+  function workLoop(deadline) {
+    console.log('本次剩余时间：', deadline.timeRemaining());
+    while (parseInt(deadline.timeRemaining()) > 0 && workArr.length > 0) {
+      performanceUnitOfWork();
+    }
+
+    if (workArr.length > 0) {
+      console.log('只剩时间：', parseInt(deadline.timeRemaining()));
+      requestIdleCallback(workLoop);
+    }
+  }
+
+  function performanceUnitOfWork() {
+    const work = workArr.shift();
+    // console.log(work);
+    work();
+  }
+</script>
+
+</html>
