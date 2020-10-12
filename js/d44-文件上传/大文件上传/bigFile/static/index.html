@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>上传大文件</title>
+    <script src="./stringify.js"></script>
+    <script src="./ajax.js"></script>
+    <script src="./concurrent.js"></script>
+  </head>
+  <body>
+    <input type="file" id="file" />
+    <button id="btn">上传</button>
+  </body>
+  <script>
+    const btn = document.querySelector("#btn");
+    const fileObj = document.querySelector("#file");
+    const limit = 10 * 1024 * 1024;
+    btn.onclick = async () => {
+      // 切块
+      const file = fileObj.files[0];
+      let chuncks, chunkCount;
+      if (file.size > limit) {
+        let res = splitChunck(file);
+        chuncks = res.chuncks;
+        chunkCount = res.chunkCount;
+      } else {
+        let fd = new FormData();
+        fd.append("file", file);
+        return sendData(fd);
+      }
+
+      // 分块上传
+      console.log(chuncks);
+      const token = +new Date();
+      let arrData = chuncks.map((item, index) => {
+        let fd = new FormData();
+        fd.append("name", file.name);
+        fd.append("file", item);
+        fd.append("index", index);
+        fd.append("token", token);
+        if (index === chunkCount - 1) {
+          fd.append("type", "merge");
+          fd.append("chunkCount", chunkCount);
+        }
+        return fd;
+      });
+
+      // 并发上传
+      // Concurrent(arrData.slice(0, -1), 4, sendData).then(res => {
+      //   // 标志性文件最后上传,保证合并文件
+      //   sendData(arrData.slice(-1)[0]).then(res => {
+      //     console.log("the end");
+      //   });
+      //   console.log(res);
+      // });
+      Concurrent2(arrData.slice(0, -1), 4, sendData).then(res => {
+        // 标志性文件最后上传,保证合并文件
+        sendData(arrData.slice(-1)[0]).then(res => {
+          console.log("the end");
+        });
+        console.log(res);
+      });
+    };
+
+    function splitChunck(file) {
+      const chunckSize = limit;
+      const size = file.size;
+      const chunkCount = Math.ceil(size / chunckSize);
+      let chuncks = [];
+      let start = 0,
+        end = chunckSize;
+      while (true) {
+        let blob = file.slice(start, end);
+        start = end;
+        end = start + chunckSize;
+        if (!blob.size) {
+          break;
+        }
+        chuncks.push(blob);
+      }
+      return {
+        chunkCount,
+        chuncks
+      };
+    }
+
+    /**
+     * @Description: 上传文件
+     * @param {data} FormData
+     */
+    function sendData(data) {
+      return new Promise((resolve, reject) => {
+        ajax({
+          method: "post",
+          url: "http://localhost:3000/upload",
+          data: data,
+          needQs: false,
+          headers: {}
+        }).then(res => {
+          resolve(res);
+        });
+      });
+    }
+  </script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>支持单/多文件上传(文件大小限制maxFieldsSize=2M)</title>
+    <script src="./stringify.js"></script>
+  </head>
+  <body>
+    <input type="file" id="file" multiple />
+    <button id="btn">上传</button>
+  </body>
+  <script>
+    const btn = document.querySelector("#btn");
+    const file = document.querySelector("#file");
+    btn.onclick = () => {
+      console.log("btn", file.files);
+      ajax({
+        method: "post",
+        url: "http://localhost:3000/upload",
+        data: file.files,
+        needQs: false,
+        headers: {}
+      }).then(res => {
+        console.log(res);
+      });
+    };
+
+    function ajax(options) {
+      let {
+        method = "GET",
+        url = "",
+        type = true,
+        data,
+        needQs = true,
+        headers = {
+          // "Content-Type": "application/x-www-form-urlencoded"
+        }
+      } = options;
+      if (url === "") throw new Error("url 不能为空~");
+      return new Promise((resolve, reject) => {
+        let body = data;
+        method = method.toUpperCase();
+        if (method === "GET") {
+          url += "?" + sequenceData(data);
+        } else if (method === "POST") {
+          if (headers["Content-Type"] === "application/x-www-form-urlencoded") {
+            body = sequenceData(data);
+          } else {
+            let formdata = new FormData();
+            for (let i = 0; i < body.length; i++) {
+              formdata.append("file", body[i]);
+            }
+            body = formdata;
+          }
+        }
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.open(method, url, type);
+        for (let key in headers) {
+          xhr.setRequestHeader(key, headers[key]);
+        }
+        xhr.onload = res => {
+          console.log(res);
+          resolve(res);
+        };
+        console.log(body);
+        xhr.send(body);
+      });
+    }
+
+    // 序列化get请求
+    function getSequenceData(data) {
+      let str = "";
+      for (let key in data) {
+        str += key + "=" + data[key] + "&";
+      }
+      return str.slice(0, -1);
+    }
+    // const a = {
+    //   a: 1,
+    //   b: 3
+    // };
+    // console.log(sequenceData(a))
+  </script>
+</html>

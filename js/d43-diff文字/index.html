@@ -1,0 +1,158 @@
+<!--
+ * @Description: description
+ * @Author: Ask
+ * @LastEditors  : Ask
+ * @Date: 2020-01-02 17:43:46
+ * @LastEditTime : 2020-01-02 21:21:58
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+
+      textarea {
+        border: 1;
+        overflow: auto;
+        height: 100%;
+        width: 100%;
+      }
+
+      input {
+        border: 1;
+        overflow: auto;
+        height: 99%;
+        width: 96%;
+      }
+      .red{
+        color: red;
+      }
+      p{
+        display: inline;
+      }
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+    <script>
+      function startCompare() {
+        var a = $.trim($("#inpLeft").val());
+        var b = $.trim($("#inpRight").val());
+
+        // var result = getHighLightDifferent(a, b);
+        // getHighLightDifferent("1000", "10012");
+        // console.log(getHighLightDifferent(a, b));
+
+        var result = highlight(a, b);
+        console.log(result);
+        $("#show1").html(result[0]);
+        $("#show2").html(result[1]);
+        return false;
+        console.log($("#inpLeft"));
+      }
+
+      function distinct(arr) {
+        var obj = {};
+        var result = [];
+        for (i = 0; i < arr.length; i++) {
+          if (!obj[arr[i]]) {
+            //如果能查找到，证明数组元素重复了
+            obj[arr[i]] = 1;
+            result.push(arr[i]);
+          }
+        }
+        return result;
+      }
+
+      function highlight() {
+        console.log(arguments)
+        var params = Array.prototype.slice.call(arguments);
+        var result = params.map(function(e) {
+          e = e.toUpperCase();
+          e = e.replace(
+            /[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,
+            ""
+          );
+          return e.split("");
+        });
+        
+        var maxLen = eval(
+          " Math.max(" +
+            result
+              .map(function(e) {
+                return e.length;
+              })
+              .join(",") +
+            ")"
+        );
+        result.forEach(function(e) {
+          if (e.length < maxLen) {
+            e.length = maxLen;
+          }
+        });
+        console.log(result)
+        var arr = [];
+        for (var i = 0; i < result[0].length; i++) {
+          if (result[0][i] === result[1][i]) {
+            continue;
+          } else {
+            arr.push(i);
+          }
+        }
+        console.log(arr)
+        arr.forEach(function(e) {
+          result[0][e] =
+            "<p class='red'>" + (result[0][e] ? result[0][e] : "") + "</p>";
+          result[1][e] =
+            "<p class='red'>" + (result[1][e] ? result[1][e] : "") + "</p>";
+        });
+        return result;
+      }
+    </script>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <div class="form-group">
+          <div class="col-sm-4">
+            <textarea
+              rows="2"
+              cols="20"
+              type="text"
+              id="inpLeft"
+              name="inpLeft"
+            >
+zhani/shan</textarea
+            >
+          </div>
+          <div class="col-sm-2">
+            <input
+              id="inpStartCompare"
+              type="button"
+              value="输出"
+              onclick="startCompare()"
+            />
+          </div>
+          <div class="col-sm-4">
+            <textarea
+              rows="2"
+              cols="20"
+              type="text"
+              id="inpRight"
+              name="inpRight"
+            >
+zhang.shei</textarea
+            >
+          </div>
+        </div>
+      </fieldset>
+      <br />
+      <div class="container">
+        <div id="show1" class="panel panel-primary"></div>
+        <div id="show2" class="panel panel-primary"></div>
+      </div>
+    </form>
+  </body>
+</html>

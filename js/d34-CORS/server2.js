@@ -4,8 +4,8 @@ http.createServer((req,res)=>{
   console.log(req.headers.referer);
   // console.log(domains.find(item => item === req.headers.referer.replace(/\/$/,"")));
   res.writeHead(200, {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "X-Requested-With,X-Requested-Withs"
+    // "Access-Control-Allow-Origin": "*",
+    // "Access-Control-Allow-Headers": "X-Requested-With,X-Requested-Withs"
   });
 
     // domains.find(

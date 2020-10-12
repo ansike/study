@@ -12,7 +12,7 @@
 <script>
   function http(port) {
     const xhr = new XMLHttpRequest();
-    xhr.open("get","http://localhost:"+port);
+    xhr.open("get","http://localhost:"+port+"/a");
     xhr.setRequestHeader("X-Requested-With","heiheihei")
     // xhr.setRequestHeader("X-Requested-Withs","heiheiheiaaa")
     xhr.send();
