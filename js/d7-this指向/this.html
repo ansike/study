@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>this指向</title>
+  </head>
+  <body></body>
+  <script>
+    var name = "xxx";
+    function show() {
+      console.log(this.name);
+    }
+    var obj1 = {
+      name: "111",
+      show: show
+    };
+    var obj2 = {
+      name: "www",
+      show: obj1.show
+    };
+    obj1.show(); // 111
+    obj2.show(); // www
+    obj1.show.call(obj2); //www
+  </script>
+</html>
