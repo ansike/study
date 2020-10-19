@@ -1,23 +1,24 @@
 {
-  "name": "compile",
+  "name": "acorn",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "acorn.js",
   "scripts": {
-    "dev": "node webpack.dev.js",
-    "build": "node webpack.prod.js",
+    "build": "node ./webpack.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "acorn": "^8.0.4"
-  },
   "devDependencies": {
+    "acorn": "^8.0.4",
+    "escodegen": "^2.0.0",
+    "estraverse": "^5.2.0",
     "html-webpack-plugin": "^4.5.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
+    "webpack": "^5.1.3"
+  },
+  "dependencies": {
+    "webpack-cli": "^4.0.0",
     "webpack-dev-server": "^3.11.0"
   }
 }

@@ -1,9 +1,17 @@
 const webpack = require("webpack");
 const selfPlugin = require("./lib/plugins/self-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 const compiler = webpack({
+  // mode: "production",
   mode: "development",
-  plugins: [new selfPlugin()]
+  // plugins: [new selfPlugin()]
+  plugins: [new HtmlWebpackPlugin()],
+  module:{
+    rules:[
+      {test:/\.css$/, use:"./lib/loaders/css.loader.js"}
+    ]
+  }
 })
 
 compiler.run((err, stats) => {
