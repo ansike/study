@@ -3,7 +3,7 @@
  * @Author: Ask
  * @LastEditors: Ask
  * @Date: 2020-11-09 23:10:22
- * @LastEditTime: 2020-11-19 09:37:08
+ * @LastEditTime: 2020-11-20 09:31:10
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@
     const ctx = canvas.getContext("2d");
     const width = canvas.width;
     const height = canvas.height;
-    
+
     // ctx.move(100, 100);
     // ctx.fillStyle="red";
     // ctx.fillRect(0, 0, 100, 100);
@@ -33,13 +33,15 @@
     const ang1 = (Math.PI * 140) / 180;
     const radius = 150;
     (function drawFrame() {
+      ctx.save()
       ctx.clearRect(0, 0, width, height);
       ctx.translate(width / 2, height / 2);
+      requestAnimationFrame(drawFrame);
       drawBigCircle(ctx);
-      sideCircle(ctx);
-      drawBigScal(ctx);
-      console.log(1);
-      // requestAnimationFrame(drawFrame);
+      // sideCircle(ctx);
+      // drawBigScal(ctx);
+      // console.log(1);
+      ctx.restore();
     })();
 
     function Dot() {
@@ -53,6 +55,7 @@
         ctx.restore();
       };
     }
+
     function drawBigCircle(ctx) {
       ctx.save();
       ctx.beginPath();
@@ -62,6 +65,7 @@
       ctx.stroke();
       ctx.restore();
     }
+
     function sideCircle(ctx) {
       ctx.save();
       ctx.beginPath();
