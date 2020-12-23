@@ -1,4 +1,3 @@
-const str = "this is a string";
 /**
 1. 创建赫夫曼树
   1.1 根据字符串生成频率表
@@ -171,4 +170,5 @@ const decodeStrFn = (str, dic) => {
   return res;
 }
 
+const str = "this is a string";
 HafumanEncode(str);
