@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .gray-path {
+      stroke-width: 10;
+      stroke: gray;
+      fill: none;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+
+    .gold-path {
+      stroke-width: 10;
+      stroke: #ff7700;
+      fill: none;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      stroke-dasharray: 217 800;
+      stroke-dashoffset: 0;
+      animation: fillGold 5s linear infinite;
+    }
+
+    @keyframes fillGold {
+      0% {
+        stroke-dashoffset: 1017;
+      }
+
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="220" height="220">
+    <filter id="f3" x="-120%" y="-120%" width="400%" height="400%">
+      <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0"></feOffset>
+      <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10"></feGaussianBlur>
+      <feBlend in="SourceGraphic" in2="blurOut" mode="multiply"></feBlend>
+    </filter>
+    <!-- 做背景 -->
+    <polygon points="100,0 160,200 0,80 200,80 40,200" class="gray-path">
+    </polygon>
+    <!-- 光影条 -->
+    <polygon points="100,0 160,200 0,80 200,80 40,200" filter="url(#f3)" class="gold-path">
+    </polygon>
+  </svg>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .mapPath {
+      stroke: #011522;
+      stroke-width: 5;
+      fill: none;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      stroke-dasharray: 0 202;
+      animation: pathAnimation 3s linear 0.5s both;
+    }
+
+    @keyframes pathAnimation {
+      0% {
+        stroke-dasharray: 0 200;
+      }
+
+      100% {
+        stroke-dasharray: 202 200;
+      }
+    }
+
+    .moveBlock {
+      stroke: rgb(0, 192, 255);
+      ;
+      stroke-width: 5;
+      fill: none;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      stroke-dasharray: 0 202;
+      stroke-dashoffset: 202;
+      animation: moveAnimation 3s linear 0.5s forwards;
+    }
+
+    @keyframes moveAnimation {
+      0% {
+        stroke-dashoffset: 202;
+        stroke-dasharray: 0 202;
+      }
+
+      30% {
+        stroke-dashoffset: 152;
+        stroke-dasharray: 33 169;
+      }
+
+      90% {
+        stroke-dashoffset: 30;
+        stroke-dasharray: 33 169;
+      }
+
+      100% {
+        stroke-dashoffset: 0;
+        stroke-dasharray: 0 202;
+      }
+    }
+
+    .pointItemBorder {
+      fill: none;
+      stroke: #2f8eed;
+      stroke-width: 2;
+    }
+
+    .pointItemCenter {
+      fill: #2f8eed;
+    }
+
+    .pointItemText {
+      text-anchor: middle;
+      fill: #47bdf9;
+      stroke: none;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  </style>
+</head>
+
+<body style="background-color: black;">
+  <svg width="671" height="528">
+    <filter id="f3" x="-120%" y="-120%" width="400%" height="400%">
+      <feOffset in="SourceGraphic" result="offOut" dx="0" dy="0"></feOffset>
+      <feGaussianBlur in="offOut" result="blurOut" stdDeviation="1"></feGaussianBlur>
+      <feBlend in="SourceGraphic" in2="blurOut" mode="multiply"></feBlend>
+    </filter>
+    <polygon
+      points="510.7644567519139,183.29643791507345 465.29516207851435,141.64298651640166 436.5489493402833,199.76655262628293"
+      class="mapPath"></polygon>
+    <polygon
+      points="510.7644567519139,183.29643791507345 465.29516207851435,141.64298651640166 436.5489493402833,199.76655262628293"
+      class="moveBlock" filter="url(#f3)"></polygon>
+    <circle cx="510.7644567519139" cy="183.29643791507345" r="8" class="pointItemBorder"></circle>
+    <circle cx="510.7644567519139" cy="183.29643791507345" r="3" class="pointItemCenter"></circle>
+    <text x="510.7644567519139" y="210.29643791507345" class="pointItemText">青岛机房</text>
+  </svg>
+
+  <svg width="671" height="528">
+    <filter id="f1">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20"></feGaussianBlur>
+    </filter>
+    <polygon
+      points="510.7644567519139,183.29643791507345 465.29516207851435,141.64298651640166 436.5489493402833,199.76655262628293"
+      class="mapPath"></polygon>
+    <polygon
+      points="510.7644567519139,183.29643791507345 465.29516207851435,141.64298651640166 436.5489493402833,199.76655262628293"
+      class="moveBlock" filter="url(#f1)"></polygon>
+    <polygon
+      points="510.7644567519139,183.29643791507345 465.29516207851435,141.64298651640166 436.5489493402833,199.76655262628293"
+      class="moveBlock"></polygon>
+    <circle cx="510.7644567519139" cy="183.29643791507345" r="8" class="pointItemBorder"></circle>
+    <circle cx="510.7644567519139" cy="183.29643791507345" r="3" class="pointItemCenter"></circle>
+    <text x="510.7644567519139" y="210.29643791507345" class="pointItemText">青岛机房</text>
+  </svg>
+</body>
+<script>
+  const arr = [
+    [510.7644567519139, 183.29643791507345],
+    [465.29516207851435, 141.64298651640166],
+    [436.5489493402833, 199.76655262628293],
+    [510.7644567519139, 183.29643791507345]
+  ]
+  let res = 0;
+  for (let index = 1; index < arr.length; index++) {
+    const [bx, by] = arr[index - 1];
+    const [cx, cy] = arr[index];
+    res += Math.sqrt(Math.pow((bx - cx), 2) + Math.pow((by - cy), 2));
+  }
+  console.log(res);
+</script>
+
+</html>
