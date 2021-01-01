@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>1.html</div>
+  <button id="btn">send message to child</button><br>
+  <iframe id="frame" src="./postmessage.2.html" frameborder="1"></iframe>
+  <div id="content"></div>
+</body>
+<script>
+  var content = document.getElementById('content');
+  var iframe = document.getElementById('frame');
+  iframe.addEventListener('load', function (val) {
+    iframe.contentWindow.postMessage('parent can send message to child', '*');
+
+    document.getElementById('btn').addEventListener('click', function () {
+      iframe.contentWindow.postMessage('data from parent', '*');
+    })
+  }, false)
+
+  window.addEventListener('message', function (e) {
+    content.innerHTML += '<br>' + e.data;
+  })
+</script>
+
+</html>

@@ -1,0 +1,69 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-10-16 23:50:58
+ * @LastEditTime: 2019-10-17 23:09:48
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    function selfAjax(options) {
+      let rejectFun = null;
+      let abortPromise = new Promise((resolve, reject) => {
+        rejectFun = () => {
+          reject('abort');
+        };
+      });
+
+      setTimeout(() => {
+        rejectFun();
+      }, 1000);
+
+      let fetchPromise = new Promise((resolve, reject) => {
+        fetch(options.url, {
+          body: JSON.stringify(options.data),
+          cache: 'no-cache',
+          credentials: 'include', // same-origin同域 omit不带凭证
+          headers: {
+            'user-agent': 'Mozilla/4.0 MDN Example',
+            'content-type': 'application/json'
+          },
+          method: (options.method && options.method.toUpperCase()) || 'GET',
+          mode: 'cors',
+          redirect: 'follow', // manual, *follow, error
+          referrer: 'no-referrer' // *client, no-referrer
+        })
+          .then(function(response) {
+            console.log(response);
+            return response.json();
+          })
+          .then(function(response) {
+            resolve(response);
+          })
+          .catch(function(e) {
+            reject(e);
+          });
+      });
+      return Promise.race([abortPromise, fetchPromise]);
+    }
+
+    let selfAjaxDemo = selfAjax({
+      url: 'http://askfuture.top/api/qaphone/question/hotlist?pn=1&rn=5',
+      method: 'get'
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(e => {
+        throw Error(e);
+      });
+  </script>
+</html>

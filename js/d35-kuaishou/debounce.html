@@ -1,0 +1,122 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-09-25 22:16:47
+ * @LastEditTime: 2019-09-29 21:03:42
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>debounce-throttle</title>
+    <style>
+      body {
+        overflow: auto;
+      }
+      #box {
+        height: 10000px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="debounce">debounce</button>
+    <div id="box"></div>
+  </body>
+  <script src="https://cdn.bootcss.com/lodash.js/4.17.15/lodash.js"></script>
+  <script src="./debounce.js"></script>
+  <script>
+    const deBtn = document.querySelector('#debounce');
+    const body = document.querySelector('body');
+    // function debounce(fn, timeout, options) {
+    //   let timer;
+    //   let { leading = false, trailing = true } = options;
+    //   // let flag = immediate;
+    //   timeout >= 0 ? timeout : 1000;
+    //   return function(...args) {
+    //     console.log(Date.now());
+    //     if (timer) clearTimeout(timer);
+
+    //     if (leading) {
+    //       fn.apply(this, args);
+    //       leading = false;
+    //     }
+
+    //     if (trailing) {
+    //       timer = setTimeout(() => {
+    //         fn.apply(this, args);
+    //         setTimeout(() => {
+    //           options.leading && (leading = true);
+    //         }, timeout);
+    //         // immediate && (flag = true)5r;
+    //       }, timeout);
+    //     }
+    //   };
+    // }
+    function debounce(fn, timeout, immediate) {
+      let timer;
+      let timer2;
+      let flag = immediate;
+      timeout >= 0 ? timeout : 1000;
+      return function(...args) {
+        if (timer) clearTimeout(timer);
+        if (timer2) clearTimeout(timer2);
+        if (flag) {
+          fn.apply(this, args);
+          flag = false;
+          return;
+        }
+        timer = setTimeout(() => {
+          fn.apply(this, args);
+          timer2 = setTimeout(() => {
+            immediate && (flag = true);
+          }, timeout);
+        }, timeout);
+      };
+    }
+    
+    function throttle(fn, timeout) {
+      let timer;
+      timeout = timeout || 300;
+      return function(...args) {
+        if (timer) {
+          return;
+        }
+        timer = setTimeout(() => {
+          fn.apply(this, args);
+          clearTimeout(timer);
+          timer = null;
+        }, timeout);
+      };
+    }
+    // deBtn.onclick = debounce(
+    //   function(e) {
+    //     console.log('deBtn.onClick', e);
+    //   },
+    //   1000,
+    //   {
+    //     leading: true
+    //   }
+    // );
+    deBtn.onclick = debounce(
+      function(e) {
+        console.log('deBtn.onClick', e);
+      },
+      1000,
+      true
+      // { maxWait: 3000, leading: true, trailing: true }
+    );
+    body.onscroll = throttle(function(e) {
+      console.log(e, Date.now());
+    });
+    // deBtn.onclick = _.debounce(
+    //   function(e) {
+    //     console.log('deBtn.onClick', e);
+    //   },
+    //   3000,
+    //   { maxWait: 3000, leading: true, trailing: true }
+    // );
+  </script>
+</html>

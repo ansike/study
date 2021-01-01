@@ -1,0 +1,126 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-08-19 19:31:01
+ * @LastEditTime: 2019-08-20 18:55:12
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>websql</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      div {
+        background: red;
+        height: 100px;
+        position: absolute;
+        left: 10px;
+        right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div id="status"></div>
+  </body>
+  <script>
+    console.time("warningList");
+    console.time("attendList");
+    let obj = {
+      content: "'1234r'",
+      studentName: "'Amy'",
+      studentPhone: 15068194609,
+      studentUid: 1000014761,
+      warningTime: 1566185969,
+      warningType: "'催到课'",
+      zybUid: 2158099625
+    };
+    let data = [];
+    for (let index = 1; index <= 10000; index++) {
+      data.push({ key: index + 2, ...obj });
+    }
+    let db = openDatabase("mydb", "1.0", "describe", 1000 * 1024 * 1024);
+    db.transaction(function(tx) {
+      tx.executeSql("drop table warningList");
+      let keyStr = Object.keys(data[0]).join(", ");
+      // console.log(`create table if not exists warningList (${keyStr})`);
+      tx.executeSql(
+        `create table if not exists warningList (key, content, studentName, studentPhone, studentUid, warningTime, warningType, zybUid)`
+      );
+      data.forEach(item => {
+        let valueStr = Object.keys(item).reduce((prev, cur) => {
+          return prev.concat(item[cur]);
+        }, []);
+        tx.executeSql(
+          `INSERT INTO warningList (${keyStr}) VALUES (${valueStr.join(",")})`
+        );
+      });
+
+      tx.executeSql("drop table attendList");
+      keyStr = Object.keys(data[0]).join(", ");
+      // console.log(`create table if not exists warningList (${keyStr})`);
+      tx.executeSql(
+        `create table if not exists attendList (key, content, studentName, studentPhone, studentUid, warningTime, warningType, zybUid)`
+      );
+      data.forEach(item => {
+        let valueStr = Object.keys(item).reduce((prev, cur) => {
+          return prev.concat(item[cur]);
+        }, []);
+        tx.executeSql(
+          `INSERT INTO attendList (${keyStr}) VALUES (${valueStr.join(",")})`
+        );
+      });
+    });
+
+    db.transaction(function(tx) {
+      tx.executeSql("SELECT * FROM warningList", [], function(tx, results) {
+        var len = results.rows.length;
+        console.log("查询出" + len + "条数据");
+        // console.table(results.rows);
+        console.timeEnd("warningList");
+      });
+      tx.executeSql("SELECT * FROM attendList", [], function(tx, results) {
+        var len = results.rows.length;
+        console.log("查询出" + len + "条数据");
+        // console.table(results.rows);
+        console.timeEnd("attendList");
+      });
+    });
+    // var db3 = openDatabase("mydb", "1.0", "Test DB", 2 * 1024 * 1024);
+    // var msg;
+
+    // db3.transaction(function(tx) {
+    //   tx.executeSql("CREATE TABLE IF NOT EXISTS LOGS (id unique, log)");
+    //   tx.executeSql('INSERT INTO LOGS (id, log) VALUES (1, "菜鸟教程")');
+    //   msg = "<p>数据表已创建，且插入了两条数据。</p>";
+    //   document.querySelector("#status").innerHTML = msg;
+    // });
+
+    // db.transaction(function(tx) {
+    //   tx.executeSql(
+    //     "SELECT * FROM LOGS",
+    //     [],
+    //     function(tx, results) {
+    //       var len = results.rows.length,
+    //         i;
+    //       msg = "<p>查询记录条数: " + len + "</p>";
+    //       document.querySelector("#status").innerHTML += msg;
+
+    //       for (i = 0; i < len; i++) {
+    //         msg = "<p><b>" + results.rows.item(i).log + "</b></p>";
+    //         document.querySelector("#status").innerHTML += msg;
+    //       }
+    //     },
+    //     null
+    //   );
+    // });
+  </script>
+</html>

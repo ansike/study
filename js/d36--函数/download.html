@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>download</title>
+  </head>
+  <body>
+    <button id="btn">下载图片</button>
+  </body>
+  <script>
+    const btn = document.querySelector("#btn");
+    btn.onclick = function() {
+      download(
+        "https://testimg.zuoyebang.cc/qa_99473a15d6d995d0af4e020448f4f828.png",
+        "下载图片.png"
+      );
+    };
+    async function download(url, fileName) {
+      console.log(url, fileName);
+      // 下载文件
+      let blob = await xhrDownload(url);
+      let res = dealData(blob);
+      createA(res, fileName);
+
+      // 处理文件
+      // dealData(new Blob([1, 2, 3]));
+
+      // 创建A标签
+      // createA(url, fileName);
+
+
+      // 下载文件
+      function xhrDownload(url) {
+        return new Promise(resolve => {
+          const XHR = new XMLHttpRequest();
+          XHR.open("GET", url);
+          XHR.responseType = "blob";
+          XHR.onload = function(e) {
+            resolve(e.target.response);
+          };
+          XHR.send();
+        });
+      }
+
+      // 处理文件 blob=>url
+      function dealData(blob) {
+        return window.URL.createObjectURL(blob);
+      }
+
+      // 创建A
+      function createA(url, fileName) {
+        let elementA = document.createElement("A");
+        elementA.href = url;
+        elementA.download = fileName;
+        setTimeout(() => {
+          elementA.click();
+          document.body.removeChild(elementA);
+        }, 60);
+        document.body.appendChild(elementA);
+      }
+    }
+  </script>
+</html>

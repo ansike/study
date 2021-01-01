@@ -1,0 +1,79 @@
+<!--
+ * @Description: 锯齿边的颜色和背景色一致,假锯齿
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-10-29 19:53:11
+ * @LastEditTime: 2019-10-30 09:04:24
+ -->
+<html lang="zh-cn" style="font-size: 100px;">
+  <head>
+    <meta charset="UTF-8" />
+    <title>验证券样式</title>
+    <style>
+      body {
+        background: linear-gradient(green, blue);
+      }
+      .addQrcode-box__content {
+        min-height: 3rem;
+        border-radius: 0.2rem;
+      }
+      .addQrcode-box__sec1 {
+        background: white;
+        border-top-left-radius: 0.2rem;
+        border-top-right-radius: 0.2rem;
+        min-height: 1rem;
+      }
+      .addQrcode-box__sec2 {
+        height: 1rem;
+        position: relative;
+        background: radial-gradient(
+              circle at left 50%,
+              transparent 0.3rem,
+              #ffffff 0
+            )
+            left / 51% 100% no-repeat,
+          radial-gradient(circle at right 50%, transparent 0.3rem, #ffffff 0)
+            right / 51% 100% no-repeat;
+      }
+      .addQrcode-box__sec2:after {
+        content: '';
+        width: calc(100% - 1rem);
+        height: 0;
+        border-bottom: dashed 1px #cccccc;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%);
+      }
+      .addQrcode-box__sec3 {
+        min-height: 1rem;
+        background: white;
+        position: relative;
+      }
+      .addQrcode-box__sec3:after {
+        content: '';
+        width: 100%;
+        height: 0.2rem;
+        position: absolute;
+        left: 0;
+        bottom: -0.2rem;
+        background-image: radial-gradient(
+          0.2rem circle at 0.2rem bottom,
+          transparent 10px,
+          #ffffff 0
+        );
+        background-size: 0.4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="addQrcode-box__content">
+      <section class="addQrcode-box__sec1">
+        <div class="addQrcode-box__avator"></div>
+        <div class="addQrcode-box__detail"></div>
+      </section>
+      <section class="addQrcode-box__sec2"></section>
+      <section class="addQrcode-box__sec3"></section>
+    </div>
+  </body>
+</html>

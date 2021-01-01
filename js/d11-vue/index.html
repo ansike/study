@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>self-vue</title>
+</head>
+<style>
+  #app {
+        text-align: center;
+    }
+</style>
+
+<body>
+  <div id="app">
+    <h2>     {{title}}</h2>
+    <input v-model="name">
+    <h1>{{name}}</h1>
+    <button v-on:click="clickMe">click me!</button>
+  </div>
+</body>
+<script src="js/observer.js"></script>
+<script src="js/watcher.js"></script>
+<script src="js/compile.js"></script>
+<script src="js/index.js"></script>
+<script type="text/javascript">
+  new SelfVue({
+    el: '#app',
+    data: {
+      title: 'hello world',
+      name: 'canfoo'
+    },
+    methods: {
+      clickMe: function () {
+        this.title = '你好' + Date.now();
+      }
+    },
+    mounted: function () {
+      window.setTimeout(() => {
+        this.title = '你好';
+      }, 1000);
+    }
+  });
+</script>
+<script>
+  var el = document.querySelector('#app');
+  // var fragment = document.createDocumentFragment();
+  var fragment = document.createElement('div');
+  var child = el.firstChild;
+  //-----------------------------------------------------------------不理解为什么会横向遍历
+  //appendChild 会把当前元素从原位置移动到当前位置，所以此处能实现子集dom的横向遍历！！！
+  while (child) {
+    // 将Dom元素移入fragment中
+    fragment.appendChild(child);
+    child = el.firstChild
+  }
+  document.body.appendChild(fragment)
+</script>
+
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "bundle",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack main.js --mode=development"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}

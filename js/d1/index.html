@@ -55,10 +55,9 @@ console.log(Dog.prototype)
 Dog.prototype = new Animal();
 console.log(Dog.prototype)
 let dog = new Dog('dog');
-console.log(dog.__proto__)
+console.log(dog)
 console.log(Animal.prototype)
 console.log(dog.sleep());
-console.log(dog.sendVoice());
 console.log(dog.__proto__);
 console.log(new Animal())
 

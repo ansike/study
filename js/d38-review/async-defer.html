@@ -1,0 +1,46 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-10-16 22:45:26
+ * @LastEditTime: 2019-10-16 23:29:52
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script async src="./async-defer/async.js"></script>
+    <script async src="./async-defer/async2.js"></script>
+    <script defer src="./async-defer/defer.js"></script>
+    <script>
+      console.log('content');
+    </script>
+    <script defer src="./async-defer/defer2.js"></script>
+    <script>
+      console.time('sss');
+      let arras = [];
+      for (let index = 0; index < 10000000; index++) {
+        arras.push(index);
+      }
+      console.timeEnd('sss');
+    </script>
+    <div>111</div>
+    <!-- 
+async-defer.html:21 content
+async-defer.html:30 sss: 309.228271484375ms
+        async.js:13 ss: 377.26904296875ms
+        async.js:14 async
+        defer.js:14 s: 299.7158203125ms
+        defer.js:15 defer1
+        async2.js:8 async2
+        defer2.js:8 defer2
+
+        奇怪async2为什么在defer1后执行
+     -->
+  </body>
+</html>

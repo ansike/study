@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  .box{
+    height: 128px;
+    background: gray;
+  }
+
+  .box:after{
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .box img{
+    height: 96px;
+    vertical-align: middle;
+  }
+  .ao{
+    width: 0;
+    color: transparent;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .ao:before{
+    content: 'love你love';
+    outline: solid 1px #ccc;
+  }
+  .ipt-box{
+    width: 400px;
+    background: rebeccapurple;
+  }
+  .ipt-box input{
+    display: block;
+    width: 100%;
+  }
+  span,em{
+    display: inline-block
+  }
+</style>
+
+<body>
+  <div class="box">
+    <img src="https://ss1.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/pic/item/9d82d158ccbf6c81860b836bb63eb13533fa4070.jpg"
+      alt="">
+  </div>
+  <div class="ao">
+
+  </div>
+  <div class="ipt-box"><input type="text"></div>
+  <div><span></span></div>
+  <p><em></em></p>
+</body>
+<script>
+  var a = 1;
+  console.log(test());
+
+  function test(params) {
+    if (true) {
+      a++;
+      if (a == 4) {
+        return 1;
+      } else {
+        return test();
+      }
+    }
+  }
+</script>
+
+</html>

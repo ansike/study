@@ -1,0 +1,42 @@
+<!--
+ * @Description: This is a description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2019-12-19 20:15:40
+ * @LastEditTime: 2019-12-19 20:36:17
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    这是页面
+    <a href="hash.html#child1">child1</a>
+    <a href="hash.html#child2">child2</a>
+    <div id="app">
+      app
+    </div>
+  </body>
+  <script>
+    const app = document.querySelector("#app");
+    window.addEventListener("hashchange", e => {
+      let html = "";
+      let hash = location.hash.slice(1);
+      switch (hash) {
+        case "child1":
+          html = "<div>child1</div>";
+          break;child1
+        case "child2":
+          html = "<div>child2</div>";
+          break;
+        default:
+          break;
+      }
+      app.innerHTML = html;
+    });
+  </script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+// function Test() {
+  
+// }
+// var test = new Test();
+
+// console.log(test.__proto__ === Test.prototype);//true
+// console.log(test.__proto__ === Object.prototype);
+// console.log(test.__proto__ === Function.prototype);
+// console.log(Test.__proto__ === Object.prototype);
+// console.log(Test.__proto__ === Function.prototype);//true
+// console.log(Test.prototype.__proto__ === Object.prototype);//true
+// console.log(Test.prototype.__proto__ === Function.prototype);
+var A=function(){}
+
+A.prototype.n=1
+
+var b=new A()
+
+A.prototype={
+
+n:2,
+
+m:3
+
+}
+
+var c=new A()
+console.log(b.n,b.m,c.n,c.m)//1,undefined,2,3
+function Test(a) { 
+  this.a = 1;
+  console.log(a || 2)
+}
+Test.prototype.aa = function (params) {
+  console.log(1)
+}
+// const test = new Test();
+console.log(new Test);
+console.log(new Test(3));
+// instanceof是通过__proto__一层一层往上找的
+console.log(test instanceof Test);
+console.log(test instanceof Object);
+console.log(Test instanceof Function);
+console.log(Test instanceof Object);
+console.log(Function instanceof Object);
+console.log(Function instanceof Function);
+console.log(Object instanceof Function);
+console.log(Object instanceof Object);
+console.log("==================================")
+console.log(test.__proto__ === Test.prototype);
+console.log(test.__proto__ === Function.prototype);
+console.log(test.__proto__ === Object.prototype);
+console.log(Test.__proto__ === Object.prototype);
+console.log(Test.__proto__ === Function.prototype);
+console.log(Test.prototype.__proto__ === Object.prototype);
+console.log(Test.prototype.__proto__ === Function.prototype);
+
+</script>
+</html>

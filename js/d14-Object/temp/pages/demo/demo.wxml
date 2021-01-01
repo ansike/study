@@ -1,0 +1,3 @@
+<view class="container">
+  <text bindtap='click'>{{initText}}</text>
+</view>

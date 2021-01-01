@@ -1,0 +1,56 @@
+<!--
+ * @Description: description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2020-11-09 23:10:22
+ * @LastEditTime: 2020-11-09 23:29:34
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #box {
+        width: 76px;
+        height: 76px;
+        position: relative;
+      }
+      .item {
+        display: inline-block;
+        position: absolute;
+        border: solid 1px red;
+        border-radius: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+  </body>
+  <script>
+    const box = document.getElementById("box");
+    const width = 38;
+    const doW = 38 * 38;
+    let str = "";
+    for (let index = 0; index <= 76; index += 2) {
+      const x = index - 38;
+      const len = Math.sqrt(doW - x * x);
+      let y1 = 38 - len;
+      let y2 = 38 + len;
+      str += `<span class="item" style="left: ${
+        x + 38
+      }px; top: ${y1}px"></span>`;
+    }
+    for (let index = 0; index <= 76; index += 2) {
+      const x = index - 38;
+      const len = Math.sqrt(doW - x * x);
+      let y1 = 38 - len;
+      let y2 = 38 + len;
+      str += `<span class="item" style="left: ${
+        x + 38
+      }px; top: ${y2}px"></span>`;
+    }
+    box.innerHTML = str;
+  </script>
+</html>

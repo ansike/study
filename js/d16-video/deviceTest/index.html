@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>设备检测</title>
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+  <style>
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: all .4s ease;
+    }
+
+    .fade-enter{
+      opacity: 0;
+      transform: translateX(100px)
+    }
+    .fade-leave-to{
+      opacity: 0;
+      transform: translateX(-100px)
+    }
+    .bounce-enter-active{
+      animation: bounce-in .5s;
+    }
+    .bounce-leave-active {
+      transition: bounce-in 2s reverse;
+    }
+    @keyframes bounce-in{
+      0%{
+        transform: scale(0)
+      }
+      50%{
+        transform: scale(1.5)
+      }
+      100%{
+        transform: scale(1)
+      }
+    }
+    .box{
+      width: 300px;
+      border: solid 1px #ccc;
+    }
+    .voice{
+      background: green;
+      height: 20px;
+      width: 0;        
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <video src="" id="video" width="400" height="300" style="border:solid 1px #ccc"></video>
+    <button @click='videoPlay'>打开摄像头</button>
+    <button @click='closeVideo'>关闭摄像头</button>
+    <audio src="" id="audio" width="400" height="300" style="border:solid 1px #ccc"></audio>
+    <button @click='record'>打开录音</button>
+    <button @click='closeRecord'>关闭录音</button>
+    <button @click='audioPlay'>播放录音</button>
+    <div class="box">
+      <p class="voice"></p>
+    </div>
+    <br>
+    {{height}}
+    <br />
+    {{message}}
+    <span :title="title">悬停</span>
+    <br>
+    <button @click="show = !show">change</button>
+    <transition name="fade">
+      <div v-if="show">hell world</div>
+    </transition>
+    <br>
+    <button @click="shows = !shows">change2</button>
+    <transition 
+      enter-active-class="bounce"
+      leave-active-class="bounceOutRight">
+      <div v-if="shows" class="animated">hell worlds</div>
+    </transition>
+    <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+      <p v-show="shows" class="animated">sssss</p>
+    </transition>
+    <transition
+      enter-active-class="animated tada"
+      leave-active-class="animated bounceOutRight"
+    >
+      <p v-if="shows">hello</p>
+    </transition>
+    <transition-group enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+      <p v-show="shows" class="animated" :key="1">a</p>
+      <p v-show="shows" class="animated" :key="2">b</p>
+    </transition-group>
+    <transition name="bounce">
+      <div v-if="shows">
+        ajsdjahsdjka
+        asdnaks
+        asdknasld
+        asdanskl
+        ssss
+      </div>
+    </transition>  
+    <div @click="animatecss">animate</div>
+    <child-example v-for="item in list" :data="item"></child-example>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="./main.js"></script>
+
+</html>

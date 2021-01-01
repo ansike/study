@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="content" data-copy="This is a test">
+    asdakdkas
+    <img src="./img/a.jpeg" alt='' />
+  </div>
+  <p>点击复制后在右边textarea CTRL+V看一下</p>
+  <input type="text" id="inputText" value="测试文本" />
+
+  <input type="button" id="btn" data-copy="测试文本" value="复制" />
+  <textarea rows="4"></textarea>
+  <script type="text/javascript">
+    var btn = document.getElementById('btn');
+    btn.addEventListener('click', function (e) {
+      //文本框选中放到剪切板
+      var inputText = document.querySelector('#inputText');
+      var value = e.target.getAttribute('data-copy')
+      inputText.value = value;
+      inputText.focus();
+      inputText.setSelectionRange(0, value.length);
+      document.execCommand('copy', true);
+    });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="./js/html2canvas.min.js"></script>
+  <script>
+    document.querySelector('#content').onclick = function (e) {
+      //执行复制某块区域方法
+      // html2canvas(e.target).then(function (canvas) {
+      //   document.body.appendChild(canvas);
+      // });
+
+      //Execute copy execCommand
+      //Note: This will ONLY work directly inside a click listenner
+      let selection = window.getSelection();
+      let range = document.createRange();
+      selection.removeAllRanges();
+      let textNode = document.createElement('span');
+      textNode.innerText = document.querySelector('#content').getAttribute('data-copy');
+      document.body.appendChild(textNode);
+      range.selectNodeContents(textNode);
+      selection.addRange(range);
+
+      document.execCommand('copy');
+      document.body.removeChild(textNode)
+    }
+  </script>
+</body>
+
+</html>

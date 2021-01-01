@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+class PromiseSelf{
+    constructor(cb){
+        this.status = 'pending';
+        this.resolves = [];
+        this.rejects = [];
+        //避免promise中执行的方法是同步的，此时then还没执行，回调函数还没准备好
+        setTimeout(()=>{
+            cb(res => {
+                this.status = 'success';
+                this.resolves.pop()(res)
+            },res => {
+                this.status = 'failed';
+                this.rejects.pop()(res)
+            })
+        })
+    }
+
+    then(resolve, reject){
+        this.resolves.push(resolve);
+        this.rejects.push(reject);
+        return this;
+    }
+}
+
+let pro = new PromiseSelf(function(resolve, reject){
+    setTimeout(()=>{
+        if(true){
+            console.log(1);
+            resolve('success');
+        }else{
+            reject('failed');
+        }
+    },10)
+    
+})
+pro.then(function(res){
+    console.log(res);
+},function(res){
+    console.log(res);
+})
+console.log(2);
+</script>
+</html>
