@@ -1,5 +1,8 @@
-/** @format */
+const a = 1;
+console.log(a);
+const asda = 111 + a;
 
-const a = 1
-
-console.log(a)
+console.log(asda);
+const asd = {
+  as: 'as',
+};
