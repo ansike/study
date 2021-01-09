@@ -13,6 +13,7 @@ module.exports = {
     es6: true,
   },
   rules: {
-    'prettier/prettier': 1,
+    'prettier/prettier': 'error',
+    semi: 'off',
   },
 };
