@@ -1,5 +1,5 @@
 #!/bin/bash
-# chkconfig 2345 40 90
+# chkconfig: 2345 40 90
 # nginx 开机自启脚本
 set -e
 function usage(){
@@ -14,6 +14,7 @@ function usage(){
 function start(){
   # netstat -lnt | grep 80
   # lsof -i:80 -P | grep "LISTEN"
+  # 不要使用该方式，当前脚本中也有nginx关键字，查询不符合：[ `ps -ef | grep -v grep | grep nginx | wc -l` -gt 0 ] && {
   [ `netstat -lnt | grep 80 | wc -l` -gt 0 ] && {
     echo "nginx is started."
     exit 0
@@ -23,7 +24,7 @@ function start(){
 }
 
 function stop(){
-  [ `ps -ef | grep -v grep | grep nginx | wc -l` -eq 0 ] && {
+  [ `netstat -lnt | grep 80 | wc -l` -eq 0 ] && {
     echo "nginx is stopped."
     exit 0
   }
