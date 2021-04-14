@@ -1,11 +1,4 @@
 #!/bin/bash
-###
- # @Description: description
- # @Author: Ask
- # @LastEditors: Ask
- # @Date: 2021-04-13 09:05:36
- # @LastEditTime: 2021-04-14 09:21:04
-### 
 array=(one two three)
 # array2=($(ls ../))
 array2=(`ls ../`)
