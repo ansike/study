@@ -1,0 +1,18 @@
+#!/bin/usr/expect
+if { $argc != 2 } {
+  send_user "usage: expect publicKeyPath,host \n"
+  exit
+}
+
+# define vars
+set file {1index $argv 0}
+set host {1index $argv 1}
+set password "Ask.2222"
+
+# start exec command
+spawn ssh-copy-id -i $file "-p 22 root@$host"
+expect {
+  "yes/no" {send "yes\r";exp_continue}
+  "*password" {send "$password\r"}
+}
+expect eof
