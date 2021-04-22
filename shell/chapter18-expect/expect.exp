@@ -5,12 +5,12 @@ if { $argc != 2 } {
 }
 
 # define vars
-set file {1index $argv 0}
-set host {1index $argv 1}
+set file [lindex $argv 0]
+set host [lindex $argv 1]
 set password "Ask.2222"
 
 # start exec command
-spawn ssh-copy-id -i $file "-p 22 root@$host"
+spawn ssh-copy-id -i $file "root@$host"
 expect {
   "yes/no" {send "yes\r";exp_continue}
   "*password" {send "$password\r"}
