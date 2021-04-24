@@ -4,5 +4,5 @@ hosts=(
 )
 for host in $hosts
 do
-  expect expect.exp ~/.ssh/id_dsa_expect.pub $host
+  expect expect.exp ~/.ssh/id_rsa_expect.pub $host
 done
