@@ -7,7 +7,7 @@ module.exports = {
   devServer: {
     contentBase: "./dist",
   },
-  mode: "development",
+  mode: process.env.NODE_ENV,
   // mode: "production",
   devtool: "inline-source-map",
   entry: {
@@ -24,20 +24,19 @@ module.exports = {
     //   dependOn: "shared",
     // },
   },
-  // optimization: {
-  //   runtimeChunk: "single",
-  //   moduleIds: "deterministic",
-  //   // moduleIds: "deterministic",
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       vendor: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         name: "vendors",
-  //         chunks: "all",
-  //       },
-  //     },
-  //   },
-  // },
+  optimization: {
+    runtimeChunk: "single",
+    moduleIds: "deterministic",
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
+  },
   output: {
     filename: "[name].[contenthash:8].js",
     path: path.resolve(__dirname, "dist"),
