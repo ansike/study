@@ -6,6 +6,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   devServer: {
     contentBase: "./dist",
+    hot: true,
   },
   mode: process.env.NODE_ENV,
   // mode: "production",

@@ -1,3 +1,6 @@
+*{
+  color: blue;
+}
 .hello {
   color: red;
   background: url('./play.png');
