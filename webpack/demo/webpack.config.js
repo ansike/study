@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   devServer: {
+    port: 9001,
     contentBase: "./dist",
     hot: true,
   },
