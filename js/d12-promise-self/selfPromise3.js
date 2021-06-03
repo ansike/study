@@ -3,7 +3,7 @@
  * @Author: Ask
  * @LastEditors: Ask
  * @Date: 2021-06-02 08:44:51
- * @LastEditTime: 2021-06-02 09:32:17
+ * @LastEditTime: 2021-06-03 09:34:35
  */
 
 const PROMISE_STATUS = {
@@ -46,7 +46,7 @@ class MyPromise {
     if (this.status === PROMISE_STATUS.FULFILLED) {
       onFulfiled(this.value);
     } else if (this.status === PROMISE_STATUS.REJECTED) {
-      onFulfiled(this.reason);
+      onRejected(this.reason);
     } else if (this.status === PROMISE_STATUS.PENDING) {
       this.onFulFiledCallbacks.push(onFulfiled);
       this.onRejectedCallbacks.push(onRejected);
