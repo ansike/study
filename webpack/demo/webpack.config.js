@@ -9,9 +9,10 @@ module.exports = {
     contentBase: "./dist",
     hot: true,
   },
-  mode: process.env.NODE_ENV,
-  // mode: "production",
-  devtool: "inline-source-map",
+  // mode: process.env.NODE_ENV,
+  mode: "production",
+  // mode: "development",
+  // devtool: "inline-source-map",
   entry: {
     app: path.resolve(__dirname, "./src/index.js"),
     // another: path.resolve(__dirname, "./src/another-module.js"),
@@ -27,23 +28,26 @@ module.exports = {
     // },
   },
   optimization: {
-    runtimeChunk: "single",
-    moduleIds: "deterministic",
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all",
-        },
-      },
-    },
+    usedExports: true,
   },
-  output: {
-    filename: "[name].[contenthash:8].js",
-    path: path.resolve(__dirname, "dist"),
-    clean: true,
-  },
+  // optimization: {
+  // runtimeChunk: "single",
+  // moduleIds: "deterministic",
+  // splitChunks: {
+  //   cacheGroups: {
+  //     vendor: {
+  //       test: /[\\/]node_modules[\\/]/,
+  //       name: "vendors",
+  //       chunks: "all",
+  //     },
+  //   },
+  // },
+  // },
+  // output: {
+  //   filename: "[name].[contenthash:8].js",
+  //   path: path.resolve(__dirname, "dist"),
+  //   clean: true,
+  // },
   plugins: [
     new HtmlWebpackPlugin({
       title: "caching",
