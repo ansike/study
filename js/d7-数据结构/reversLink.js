@@ -3,7 +3,7 @@
  * @Author: Ask
  * @LastEditors: Ask
  * @Date: 2021-08-11 23:35:08
- * @LastEditTime: 2021-08-12 23:44:09
+ * @LastEditTime: 2021-08-12 23:55:28
  */
 
 
@@ -23,8 +23,7 @@ const link1 = {
 
 // const res = reverse(link1);
 // console.log(res);
-
-
+// 递归法
 function reverse(head) {
   // 链表为空或者递归到最后一个节点
   if (head === null || head.next === null) return head;
@@ -33,6 +32,21 @@ function reverse(head) {
   head.next.next = head;
   head.next = null;
   return curNode;
+}
+
+const res4 = reverse4(link1);
+console.log(res4);
+// 尾递归法
+function reverse4(head) {
+  // 链表为空或者递归到最后一个节点
+  if (head === null || head.next === null) return head;
+  const helper = (prev, cur) => {
+    if(!cur) return prev;
+    const next = cur.next;
+    cur.next = prev;
+    return helper(cur, next);
+  }
+  return helper(null, head)
 }
 
 // const res2 = reverse2(link1);
@@ -50,8 +64,8 @@ function reverse2(head) {
   return prev;
 }
 
-const res3 = reverse3(link1);
-console.log(res3);
+// const res3 = reverse3(link1);
+// console.log(res3);
 // 双指针循环,首指针和next指针循环,首指针需要特殊处理一下
 function reverse3(head) {
   while (head === null || head.next === null) return head;
