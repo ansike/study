@@ -12,16 +12,17 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 var req = https.request(options);
 
-req.on('connect', function(res, socket) {
+req.on('connect', (res, socket) => {
 	console.log('connect');
 	socket.write('GET / HTTP/1.1\r\n' + 'Host: 127.0.0.1\r\n' + 'Connection: Close\r\n' + '\r\n');
-
+	let str = '';
 	socket.on('data', function(chunk) {
-		console.log(chunk.toString());
+		str += chunk.toString();
 	});
 
 	socket.on('end', function() {
 		console.log('socket end.');
+		console.log(str);
 	});
 });
 
