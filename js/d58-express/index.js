@@ -3,7 +3,7 @@
  * @Author: Ask
  * @LastEditors: Ask
  * @Date: 2021-08-15 11:36:22
- * @LastEditTime: 2021-08-15 14:25:41
+ * @LastEditTime: 2021-08-18 23:27:58
  */
 const express = require("./express");
 const PORT = 8000;
@@ -27,3 +27,8 @@ app.post("/api/hello", (req, res) => {
 app.listen(PORT, () => {
   console.log(`服务启动在: ${PORT}端口`);
 });
+
+const cityData = [
+  { id: 1, name: "深圳", children: [{ id: 11, name: "南山区", children: [] }] },
+  { id: 2, name: "北京", children: [] },
+];

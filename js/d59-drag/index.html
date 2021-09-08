@@ -1,0 +1,61 @@
+<!--
+ * @Description: description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2021-09-08 23:10:16
+ * @LastEditTime: 2021-09-08 23:47:04
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 20px;
+        height: 20px;
+      }
+      #dragBtn {
+        height: 20px;
+        background-color: red;
+      }
+      #box {
+        width: 400px;
+        height: 400px;
+        border: solid 1px #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dragBtn">
+      <button draggable="true">btn</button>
+      <img src="./icon.png" id="img" alt="" srcset="" />
+    </div>
+    <div id="box"></div>
+  </body>
+  <script>
+    const box = document.querySelector("#box");
+    const img = document.querySelector("#dragBtn img");
+
+    img.addEventListener("dragstart", (e) => {
+      // 目标event对象设置属性
+      e.dataTransfer.setData("Text", e.target.id + "");
+    });
+
+    box.addEventListener("dragover", (e) => {
+      // 阻止默认事件
+      e.preventDefault();
+    });
+
+    box.addEventListener("drop", (e) => {
+      e.preventDefault();
+      // 处理之后的操作
+      const itemId = e.dataTransfer.getData("Text");
+      if (itemId) {
+        e.target.appendChild(document.getElementById(itemId));
+      }
+    });
+  </script>
+</html>
