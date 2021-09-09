@@ -1,0 +1,78 @@
+<!--
+ * @Description: description
+ * @Author: Ask
+ * @LastEditors: Ask
+ * @Date: 2021-09-09 20:02:50
+ * @LastEditTime: 2021-09-09 20:59:43
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hash history</title>
+  </head>
+  <body>
+    <ul id="nav">
+      <li><a href="/">首页</a></li>
+      <li><a href="/page1">page1</a></li>
+      <li><a href="/page2">page2</a></li>
+    </ul>
+    <div id="content"></div>
+  </body>
+  <script>
+    class Router {
+      instance;
+      router = {};
+      constructor() {
+        history.replaceState({ path: "/" }, "a", "/");
+        window.addEventListener("popstate", (e) => {
+          const component = this.router[e.state.path];
+          if (component) component();
+        });
+      }
+      init() {
+        if (!this.instance) {
+          this.instance = new Router();
+        }
+        return this.instance;
+      }
+      addRoute(path, component) {
+        this.router[path] = component;
+      }
+      push(path) {
+        const component = this.router[path];
+        history.pushState({ path }, "aa", path);
+        if (component) {
+          component();
+        } else {
+          console.log("未找到当前路由");
+        }
+      }
+    }
+
+    const box = document.querySelector("#content");
+    const navBox = document.querySelector("#nav");
+    const curRouter = new Router();
+    curRouter.addRoute("/", () => {
+      box.innerHTML = "首页";
+    });
+    curRouter.addRoute("/page1", () => {
+      box.innerHTML = "page1";
+    });
+    curRouter.addRoute("/page2", () => {
+      box.innerHTML = "page2";
+    });
+
+    navBox.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (e.target.tagName === "A") {
+        const path = e.target.getAttribute("href");
+        curRouter.push(path);
+      }
+    });
+
+    console.log(curRouter.router);
+  </script>
+</html>

@@ -20,13 +20,14 @@
         this.routes = {}; // 记录路径标识符对应的cb
         history.replaceState({ path }, null, path); // 进入状态
         this.routes[path] && this.routes[path]();
-        window.addEventListener("popstate", e => {// 当用户点击浏览器的前进或者后退触发
-            console.log(e.state)
+        window.addEventListener("popstate", (e) => {
+          // 当用户点击浏览器的前进或者后退触发
+          console.log(e.state);
           const path = e.state && e.state.path;
           this.routes[path] && this.routes[path]();
         });
       }
-      
+
       /* 初始化 */
       static init() {
         window.Router = new RouterClass(location.pathname);
@@ -34,12 +35,11 @@
 
       /* 注册路由和回调 */
       route(path, cb) {
-        this.routes[path] = cb || function() {};
+        this.routes[path] = cb || function () {};
       }
 
       /* 跳转路由，并触发路由对应回调 */
       go(path) {
-        
         history.pushState({ path }, null, path);
         console.log(history);
         this.routes[path] && this.routes[path]();
@@ -49,13 +49,15 @@
     RouterClass.init();
     const ul = document.querySelector("ul");
     const ContentDom = document.querySelector(".content-div");
-    const changeContent = content => (ContentDom.innerHTML = content);
+    const changeContent = (content) => (ContentDom.innerHTML = content);
 
     Router.route("/", () => changeContent("默认页面"));
-    Router.route("/page1", () => changeContent("page1页面"));
+    Router.route("/page1", () => {
+      changeContent("page1页面");
+    });
     Router.route("/page2", () => changeContent("page2页面"));
 
-    ul.addEventListener("click", e => {
+    ul.addEventListener("click", (e) => {
       console.log(e.target.tagName);
       if (e.target.tagName === "A") {
         e.preventDefault();
