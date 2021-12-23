@@ -23,9 +23,10 @@ class Watcher {
   }
 }
 class Vue {
-  constructor({ data, computed }) {
+  constructor({ data, computed, watch }) {
     this.initData(data);
     this.initComputed(computed);
+    this.initWatch(watch);
   }
   initData(data) {
     Object.keys(data).forEach((key) => {
@@ -44,6 +45,12 @@ class Vue {
         },
         set() {},
       });
+    }
+  }
+  initWatch(watch) {
+    for (const key in watch) {
+      const userDef = watch[key];
+      new Watcher(this, userDef);
     }
   }
   defineReactive(key, val) {
@@ -74,6 +81,11 @@ const vue = new Vue({
   data: {
     firstName: "first",
     lastName: "last",
+  },
+  watch:{
+    firstName(){
+      console.log('watch', this.firstName);
+    }
   },
   computed: {
     fullName() {
