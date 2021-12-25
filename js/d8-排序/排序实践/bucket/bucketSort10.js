@@ -1,34 +1,33 @@
 /*
- * @Description: This is a description
- * @Author: Ask
- * @LastEditors: Ask
+ * @Description: 10个桶排序
  * @Date: 2019-10-05 16:36:11
- * @LastEditTime: 2019-10-05 17:36:30
+ * @LastEditTime: 2021-12-26 00:03:22
  */
-const fs = require('fs');
+const fs = require("fs");
+const path = require("path");
+const dirpath = path.resolve(__dirname, "./data");
+
+console.time("bucketSort");
+bucketSort();
+console.timeEnd("bucketSort");
+
 function bucketSort() {
-  let bucketLength = 10;
-  let bucket = Array.from({ length: bucketLength }, () => []);
-  console.log(bucket);
+  const bucketLength = 10;
+  const ageRange = 100;
+  // 此处创建的桶在内存中, 在限制内存的场景中需要放在硬盘上
+  const bucket = Array.from({ length: bucketLength }, () => []);
   for (let index = 1; index <= 10; index++) {
-    let data = require('../data/' + index + '.json');
-    data.forEach(element => {
-      bucket[Math.floor(element.age / 10)].push(element);
+    const data = require(path.resolve(dirpath, index + ".json"));
+    data.forEach((element) => {
+      bucket[Math.floor(element.age / bucketLength)].push(element);
     });
   }
   bucket.forEach((item, i) => {
     item.sort((a, b) => a.age - b.age);
-    console.log(`年龄在${i * 10}~${i * 10 + 9}的学生人数有${item.length}`);
-    fs.writeFile(
-      '../data/bucket' + (i + 1) + '.json',
-      JSON.stringify(item),
-      'utf-8',
-      res => {
-        // console.log(res);
-      }
+    console.log(
+      `年龄在${(i * ageRange) / bucketLength}~${
+        (i * ageRange) / bucketLength + 9
+      }的学生人数有${item.length}`
     );
   });
 }
-console.time('bucketSort');
-bucketSort();
-console.timeEnd('bucketSort');

@@ -2,4 +2,4 @@ dist
 node_modules/
 flutter/
 .history/
-./*/.DS_Store
+.DS_Store
